@@ -50,7 +50,7 @@ describe('Search Results Flight Details Component', () => {
       arrive: moment(ARRIVAL, 'YYYY-MM-DD HH:mm A').valueOf(),
     };
     let wrapper = shallow(<FlightDetails {...TEST_FLIGHT_DETAILS} />);
-    expect(wrapper.prop('className')).to.eql('flight-details');
+    expect(wrapper.hasClass('flight-details')).to.eql(true);
   });
 
   describe('Flight Number Component', () => {
@@ -64,7 +64,7 @@ describe('Search Results Flight Details Component', () => {
     it('should have the flight-number class name', () => {
       const TEST_FLIGHT_NUMBER = FLIGHT_NUMBER;
       let wrapper = shallow(<FlightNumber value={TEST_FLIGHT_NUMBER} />);
-      expect(wrapper.prop('className')).to.eql('flight-number');
+      expect(wrapper.hasClass('flight-number')).to.eql(true);
     });
   });
 
@@ -79,7 +79,7 @@ describe('Search Results Flight Details Component', () => {
     it('should have the flight-from class name', () => {
       const TEST_FROM = FROM;
       let wrapper = shallow(<From value={TEST_FROM} />);
-      expect(wrapper.prop('className')).to.eql('flight-from');
+      expect(wrapper.hasClass('flight-from')).to.eql(true);
     });
   });
 
@@ -94,7 +94,7 @@ describe('Search Results Flight Details Component', () => {
     it('should have the flight-destination class name', () => {
       const TEST_DESTINATION = DESTINATION;
       let wrapper = shallow(<Destination value={TEST_DESTINATION} />);
-      expect(wrapper.prop('className')).to.eql('flight-destination');
+      expect(wrapper.hasClass('flight-destination')).to.eql(true);
     });
   });
 
@@ -109,7 +109,7 @@ describe('Search Results Flight Details Component', () => {
     it('should have the flight-departure class name', () => {
       const TEST_DEPARTURE = moment(DEPARTURE, 'YYYY-MM-DD HH:mm A').valueOf();
       let wrapper = shallow(<Departure value={TEST_DEPARTURE} />);
-      expect(wrapper.prop('className')).to.eql('flight-departure');
+      expect(wrapper.hasClass('flight-departure')).to.eql(true);
     });
   });
 
@@ -124,7 +124,7 @@ describe('Search Results Flight Details Component', () => {
     it('should have the flight-arrival class name', () => {
       const TEST_ARRIVAL = moment(ARRIVAL, 'YYYY-MM-DD HH:mm A').valueOf()
       let wrapper = shallow(<Arrival value={TEST_ARRIVAL} />);
-      expect(wrapper.prop('className')).to.eql('flight-arrival');
+      expect(wrapper.hasClass('flight-arrival')).to.eql(true);
     });
   });
 });
