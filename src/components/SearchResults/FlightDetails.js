@@ -16,8 +16,8 @@ export default class FlightDetails extends React.Component {
         <FlightNumber value={this.props.number} />
         <From value={this.props.from} />
         <Destination value={this.props.destination} />
-        <Depart value={this.props.depart} />
-        <Arrive value={this.props.arrive} />
+        <Departure value={this.props.depart} />
+        <Arrival value={this.props.arrive} />
       </div>
     );
   };
@@ -50,7 +50,7 @@ export class Destination extends React.Component {
   };
 }
 
-export class Depart extends React.Component {
+export class Departure extends React.Component {
   static propTypes = {
     value: React.PropTypes.number.isRequired
   };
@@ -59,7 +59,7 @@ export class Depart extends React.Component {
   };
 }
 
-export class Arrive extends React.Component {
+export class Arrival extends React.Component {
   static propTypes = {
     value: React.PropTypes.number.isRequired
   };
