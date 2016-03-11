@@ -18,7 +18,7 @@ describe('Search Result Item Component', () => {
       depart: moment('2014-01-01 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
       arrive: moment('2014-01-01 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
     };
-    const TEST_PRICE = 125;
+    const TEST_PRICE = { symbol: '£', value: 125 };
     const TEST_ON_SELECT_HANDLER = sinon.spy();
     let wrapper = shallow(<ResultItem flight={TEST_FLIGHT_DETAILS}
       price={TEST_PRICE} onSelect={TEST_ON_SELECT_HANDLER} />);
@@ -40,7 +40,7 @@ describe('Search Result Item Component', () => {
       depart: moment('2014-01-10 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
       arrive: moment('2014-01-10 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
     };
-    const TEST_PRICE = 125;
+    const TEST_PRICE = { symbol: '£', value: 125 };
     const TEST_ON_SELECT_HANDLER = sinon.spy();
     let wrapper = shallow(<ResultItem flight={TEST_FLIGHT_DETAILS} return={TEST_RETURN_FLIGHT_DETAILS}
       price={TEST_PRICE} onSelect={TEST_ON_SELECT_HANDLER} />);
@@ -56,7 +56,7 @@ describe('Search Result Item Component', () => {
       depart: moment('2014-01-01 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
       arrive: moment('2014-01-01 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
     };
-    const TEST_PRICE = 125;
+    const TEST_PRICE = { symbol: '£', value: 125 };
     const TEST_ON_SELECT_HANDLER = sinon.spy();
     let wrapper = shallow(<ResultItem flight={TEST_FLIGHT_DETAILS}
       price={TEST_PRICE} onSelect={TEST_ON_SELECT_HANDLER} />);
@@ -79,7 +79,7 @@ describe('Search Result Item Component', () => {
       depart: moment('2014-01-10 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
       arrive: moment('2014-01-10 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
     };
-    const TEST_PRICE = 125;
+    const TEST_PRICE = { symbol: '£', value: 125 };
     const TEST_ON_SELECT_HANDLER = sinon.spy();
     let wrapper = shallow(<ResultItem flight={TEST_FLIGHT_DETAILS} return={TEST_RETURN_FLIGHT_DETAILS}
       price={TEST_PRICE} onSelect={TEST_ON_SELECT_HANDLER} />);
