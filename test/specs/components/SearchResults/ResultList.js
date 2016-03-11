@@ -62,4 +62,10 @@ describe('Result List Component', () => {
       expect(Node.props()).to.eql(RESULT_LIST_PROPS.items[index]);
     });
   });
+
+  it('should have result-list class name', () => {
+    const RESULT_LIST_PROPS = { items: [] };
+    let wrapper = shallow(<ResultList {...RESULT_LIST_PROPS} />);
+    expect(wrapper.hasClass('result-list')).to.eql(true);
+  });
 });
