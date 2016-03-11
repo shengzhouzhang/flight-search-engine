@@ -1,5 +1,6 @@
 
 import React from 'react';
+import moment from 'moment';
 
 export default class FlightDetails extends React.Component {
   static propTypes = {
@@ -27,7 +28,7 @@ export class FlightNumber extends React.Component {
     value: React.PropTypes.string.isRequired
   };
   render = () => {
-    return (<div class="flight-number"></div>);
+    return (<div class="flight-number">{ this.props.value }</div>);
   };
 }
 
@@ -36,7 +37,7 @@ export class From extends React.Component {
     value: React.PropTypes.string.isRequired
   };
   render = () => {
-    return (<div class="flight-from"></div>);
+    return (<div class="flight-from">{ this.props.value }</div>);
   };
 }
 
@@ -45,7 +46,7 @@ export class Destination extends React.Component {
     value: React.PropTypes.string.isRequired
   };
   render = () => {
-    return (<div class="flight-destination"></div>);
+    return (<div class="flight-destination">{ this.props.value }</div>);
   };
 }
 
@@ -54,7 +55,7 @@ export class Depart extends React.Component {
     value: React.PropTypes.number.isRequired
   };
   render = () => {
-    return (<div class="flight-depart"></div>);
+    return (<div class="flight-depart">{ moment(this.props.value).format('HH:mm A') }</div>);
   };
 }
 
@@ -63,6 +64,6 @@ export class Arrive extends React.Component {
     value: React.PropTypes.number.isRequired
   };
   render = () => {
-    return (<div class="flight-arrive"></div>);
+    return (<div class="flight-arrive">{ moment(this.props.value).format('HH:mm A') }</div>);
   };
 }

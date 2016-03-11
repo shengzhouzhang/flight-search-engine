@@ -70,19 +70,19 @@ describe('Search Results Flight Details Component', () => {
 
   describe('Depart Component', () => {
 
-    it('should show flight departure time', () => {
+    it('should show formated flight departure time', () => {
       const TEST_DEPART = moment(DEPART, 'YYYY-MM-DD HH:mm A').valueOf();
       let wrapper = shallow(<Depart value={TEST_DEPART} />);
-      expect(wrapper.text()).to.eql(DEPART.split(' ')[1]);
+      expect(wrapper.text()).to.eql(DEPART.substring(11));
     });
   });
 
   describe('Arrive Component', () => {
 
-    it('should show flight arrival time', () => {
+    it('should show formated flight arrival time', () => {
       const TEST_ARRIVE = moment(ARRIVE, 'YYYY-MM-DD HH:mm A').valueOf()
       let wrapper = shallow(<Arrive value={TEST_ARRIVE} />);
-      expect(wrapper.text()).to.eql(ARRIVE.split(' ')[1]);
+      expect(wrapper.text()).to.eql(ARRIVE.substring(11));
     });
   });
 });
