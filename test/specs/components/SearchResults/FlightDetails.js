@@ -41,7 +41,7 @@ describe('Search Results Flight Details Component', () => {
     expect(wrapper.find(Arrival).prop('value')).to.eql(TEST_FLIGHT_DETAILS.arrive);
   });
 
-  it('should have the flight-details class name', () => {
+  it('should have the flight-details class', () => {
     const TEST_FLIGHT_DETAILS = {
       number: FLIGHT_NUMBER,
       from: FROM,
@@ -61,7 +61,7 @@ describe('Search Results Flight Details Component', () => {
       expect(wrapper.text()).to.eql(TEST_FLIGHT_NUMBER);
     });
 
-    it('should have the flight-number class name', () => {
+    it('should have the flight-number class', () => {
       const TEST_FLIGHT_NUMBER = FLIGHT_NUMBER;
       let wrapper = shallow(<FlightNumber value={TEST_FLIGHT_NUMBER} />);
       expect(wrapper.hasClass('flight-number')).to.eql(true);
@@ -76,7 +76,7 @@ describe('Search Results Flight Details Component', () => {
       expect(wrapper.text()).to.eql(TEST_FROM);
     });
 
-    it('should have the flight-from class name', () => {
+    it('should have the flight-from class', () => {
       const TEST_FROM = FROM;
       let wrapper = shallow(<From value={TEST_FROM} />);
       expect(wrapper.hasClass('flight-from')).to.eql(true);
@@ -91,7 +91,7 @@ describe('Search Results Flight Details Component', () => {
       expect(wrapper.text()).to.eql(TEST_DESTINATION);
     });
 
-    it('should have the flight-destination class name', () => {
+    it('should have the flight-destination class', () => {
       const TEST_DESTINATION = DESTINATION;
       let wrapper = shallow(<Destination value={TEST_DESTINATION} />);
       expect(wrapper.hasClass('flight-destination')).to.eql(true);
@@ -106,7 +106,7 @@ describe('Search Results Flight Details Component', () => {
       expect(wrapper.text()).to.eql(DEPARTURE.substring(11));
     });
 
-    it('should have the flight-departure class name', () => {
+    it('should have the flight-departure class', () => {
       const TEST_DEPARTURE = moment(DEPARTURE, 'YYYY-MM-DD HH:mm A').valueOf();
       let wrapper = shallow(<Departure value={TEST_DEPARTURE} />);
       expect(wrapper.hasClass('flight-departure')).to.eql(true);
@@ -121,7 +121,7 @@ describe('Search Results Flight Details Component', () => {
       expect(wrapper.text()).to.eql(ARRIVAL.substring(11));
     });
 
-    it('should have the flight-arrival class name', () => {
+    it('should have the flight-arrival class', () => {
       const TEST_ARRIVAL = moment(ARRIVAL, 'YYYY-MM-DD HH:mm A').valueOf()
       let wrapper = shallow(<Arrival value={TEST_ARRIVAL} />);
       expect(wrapper.hasClass('flight-arrival')).to.eql(true);

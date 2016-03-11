@@ -63,7 +63,7 @@ describe('Search Result Item Component', () => {
     expect(wrapper.contains(<SelectButton onSelect={wrapper.instance().onSelectHandler} />)).to.eql(true);
   });
 
-  it('should have the search-result-item and one-way class name', () => {
+  it('should have the search-result-item and one-way class', () => {
     const RESULT_ITEN_PROPS = {
       _id: 'TEST_ID',
       airline: { logoUri: 'LOGO_URI' },
@@ -82,7 +82,7 @@ describe('Search Result Item Component', () => {
     expect(wrapper.hasClass('one-way')).to.eql(true);
   });
 
-  it('should have the search-result-item and return class name', () => {
+  it('should have the search-result-item and return class', () => {
     const RESULT_ITEN_PROPS = {
       _id: 'TEST_ID',
       airline: { logoUri: 'LOGO_URI' },

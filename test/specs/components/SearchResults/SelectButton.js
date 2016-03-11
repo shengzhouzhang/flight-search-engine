@@ -14,7 +14,7 @@ describe('Select Button Component', () => {
     expect(wrapper.text()).to.eql('select this flight');
   });
 
-  it('should have the select-button class name', () => {
+  it('should have the select-button class', () => {
     const TEST_ON_SELECT_HANDLER = sinon.spy();
     let wrapper = shallow(<SelectButton onSelect={TEST_ON_SELECT_HANDLER} />);
     expect(wrapper.hasClass('select-button')).to.eql(true);

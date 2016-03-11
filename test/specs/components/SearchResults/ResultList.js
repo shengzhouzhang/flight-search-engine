@@ -63,7 +63,7 @@ describe('Result List Component', () => {
     });
   });
 
-  it('should have result-list class name', () => {
+  it('should have result-list class', () => {
     const RESULT_LIST_PROPS = { items: [] };
     let wrapper = shallow(<ResultList {...RESULT_LIST_PROPS} />);
     expect(wrapper.hasClass('result-list')).to.eql(true);

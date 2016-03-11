@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import ResultList from '../../../../src/components/SearchResults/ResultList';
-import SearchResults, { SearchQuery } from '../../../../src/components/SearchResults/SearchResults';
+import SearchResults, { Header, SearchQuery } from '../../../../src/components/SearchResults/SearchResults';
 
 describe('Search Results Component', () => {
 
@@ -35,12 +35,12 @@ describe('Search Results Component', () => {
       } ]
     };
     let wrapper = shallow(<SearchResults {...SEARCH_RESULTS_PROPS} />);
-    expect(wrapper.contains(<h4>Your Results</h4>)).to.eql(true);
+    expect(wrapper.contains(<Header />)).to.eql(true);
     expect(wrapper.contains(<SearchQuery {...SEARCH_RESULTS_PROPS.query} />)).to.eql(true);
     expect(wrapper.contains(<ResultList items={SEARCH_RESULTS_PROPS.results} />)).to.eql(true);
   });
 
-  it('should have the search-results class name', () => {
+  it('should have the search-results class', () => {
     const SEARCH_RESULTS_PROPS = {
       query: { departureDate: moment().valueOf(), returnDate: moment().valueOf() },
       results: [ {
@@ -66,5 +66,47 @@ describe('Search Results Component', () => {
     };
     let wrapper = shallow(<SearchResults {...SEARCH_RESULTS_PROPS} />);
     expect(wrapper.hasClass('search-results')).to.eql(true);
+  });
+
+  describe('Header Component', () => {
+
+    it('should show the title', () => {
+      let wrapper = shallow(<Header />);
+      expect(wrapper.text()).to.eql('your results');
+    });
+
+    it('should have the header class', () => {
+      let wrapper = shallow(<Header />);
+      expect(wrapper.hasClass('header')).to.eql(true);
+    });
+  });
+
+  describe('SearchQuery Component', () => {
+
+    it('should show the departure date', () => {
+      const SEARCH_QUERY_PROPS = {
+        departureDate: moment('2014-01-01', 'YYYY-MM-DD').valueOf()
+      };
+      let wrapper = shallow(<SearchQuery {...SEARCH_QUERY_PROPS} />);
+      expect(wrapper.find('.departure-date').text()).to.eql('1st Jan 2014');
+    });
+
+    it('should show the departure date and return date', () => {
+      const SEARCH_QUERY_PROPS = {
+        departureDate: moment('2014-01-01', 'YYYY-MM-DD').valueOf(),
+        returnDate: moment('2014-01-10', 'YYYY-MM-DD').valueOf(),
+      };
+      let wrapper = shallow(<SearchQuery {...SEARCH_QUERY_PROPS} />);
+      expect(wrapper.find('.departure-date').text()).to.eql('1st Jan 2014');
+      expect(wrapper.find('.return-date').text()).to.eql('10th Jan 2014');
+    });
+
+    it('should have the search-query class', () => {
+      const SEARCH_QUERY_PROPS = {
+        departureDate: moment('2014-01-01', 'YYYY-MM-DD').valueOf()
+      };
+      let wrapper = shallow(<SearchQuery {...SEARCH_QUERY_PROPS} />);
+      expect(wrapper.hasClass('search-query')).to.eql(true);
+    });
   });
 });

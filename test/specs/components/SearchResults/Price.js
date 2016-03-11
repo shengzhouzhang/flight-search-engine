@@ -13,7 +13,7 @@ describe('Price Component', () => {
     expect(wrapper.text()).to.eql(`${TEST_PRICE.symbol} ${TEST_PRICE.value}`);
   });
 
-  it('should have the price class name', () => {
+  it('should have the price class', () => {
     const TEST_PRICE = { value: 125, symbol: '£' };
     let wrapper = shallow(<Price {...TEST_PRICE} />);
     expect(wrapper.hasClass('price')).to.eql(true);
