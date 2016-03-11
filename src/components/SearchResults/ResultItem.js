@@ -11,35 +11,9 @@ export default class ResultItem extends React.Component {
   };
   render = () => {
     return (
-      <div className="search-result-item">
-        <OneWay flight={ this.props.flight } />
-        { !!this.props.return ? (<Return flight={ this.props.return } />) : (undefined) }
-      </div>
-    );
-  };
-}
-
-export class OneWay extends React.Component {
-  static propTypes = {
-    flight: React.PropTypes.object.isRequired
-  };
-  render = () => {
-    return (
-      <div className="flight-details-one-way">
+      <div className={`search-result-item ${ this.props.return ? 'return' : 'one-way'}`}>
         <FlightDetails {...this.props.flight} />
-      </div>
-    );
-  };
-}
-
-export class Return extends React.Component {
-  static propTypes = {
-    flight: React.PropTypes.object.isRequired
-  };
-  render = () => {
-    return (
-      <div className="flight-details-return">
-        <FlightDetails {...this.props.flight} />
+        { !!this.props.return ? (<FlightDetails {...this.props.return} />) : (undefined) }
       </div>
     );
   };
