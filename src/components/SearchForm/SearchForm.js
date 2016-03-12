@@ -1,25 +1,26 @@
 
 import _ from 'lodash';
+import Promise from 'bluebird';
 import React from 'react';
-import TextInput from '../../components/TextInput';
-import DateInput from '../../components/DateInput';
-import NumericInput from '../../components/NumericInput';
-import SubmitButton from '../../components/SubmitButton';
+import TextInput from '../../components/SearchForm/TextInput';
+import DateInput from '../../components/SearchForm/DateInput';
+import NumericInput from '../../components/SearchForm/NumericInput';
+import SubmitButton from '../../components/SearchForm/SubmitButton';
+import ticketTypes from '../../config/ticketTypes';
 
-const TICKET_TYPES = {
-  ONEWAY: 'one-way',
-  RETURN: 'return',
-}
 export default class SearchForm extends React.Component {
   static propTypes = {
-    type: React.PropTypes.oneof([ TICKET_TYPES.ONEWAY, TICKET_TYPES.RETURN ]).isRequired
+    type: React.PropTypes.oneOf([ ticketTypes.ONEWAY, ticketTypes.RETURN ]).isRequired
   };
-  state = {
-    from: null,
-    destination: null,
-    departureDate: null,
-    returnDate: null,
-    passengers: null,
+  constructor (props) {
+    super(props);
+    this.state = {
+      from: null,
+      destination: null,
+      departureDate: null,
+      passengers: null
+    };
+    if (this.hasReturnFlight()) { this.state.returnDate = null; }
   };
   render = () => {
     return (
@@ -38,35 +39,35 @@ export default class SearchForm extends React.Component {
   };
   onSubmitHandler = () => {
     switch(this.props.type) {
-      case TICKET_TYPES.ONEWAY:
-        let query = this.buildQueryOneWay();
-        console.log(query);
+      case ticketTypes.ONEWAY:
+        return this.buildQueryOneWay()
+          .then(query => console.log(query));
         break;
-      case TICKET_TYPES.RETURN:
-        let query = this.buildQueryReturn();
-        console.log(query);
+      case ticketTypes.RETURN:
+        return this.buildQueryReturn()
+          .then(query => console.log(query));
         break;
       default:
         throw new Error(`invalid search form type: ${this.props.type}`);
     }
   };
   hasReturnFlight = () => {
-    return this.props.type === TICKET_TYPES.RETURN;
+    return this.props.type === ticketTypes.RETURN;
   };
   buildQueryOneWay = () => {
-    return {
-      type: TICKET_TYPES.ONEWAY,
+    return Promise.resolve({
+      type: ticketTypes.ONEWAY,
       query: {
         from: this.state.from,
         destination: this.state.destination,
         departureDate: this.state.departureDate,
         passengers: this.state.passengers
       }
-    };
+    });
   };
   buildQueryReturn = () => {
-    return {
-      type: TICKET_TYPES.RETURN,
+    return Promise.resolve({
+      type: ticketTypes.RETURN,
       query: {
         from: this.state.from,
         destination: this.state.destination,
@@ -74,6 +75,6 @@ export default class SearchForm extends React.Component {
         returnDate: this.state.returnDate,
         passengers: this.state.passengers
       }
-    };
+    });
   };
 }
