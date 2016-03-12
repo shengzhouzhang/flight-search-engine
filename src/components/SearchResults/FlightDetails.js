@@ -7,8 +7,8 @@ export default class FlightDetails extends React.Component {
     number: React.PropTypes.string.isRequired,
     from: React.PropTypes.string.isRequired,
     destination: React.PropTypes.string.isRequired,
-    depart: React.PropTypes.number.isRequired,
-    arrive: React.PropTypes.number.isRequired
+    departureTime: React.PropTypes.number.isRequired,
+    arrivalTime: React.PropTypes.number.isRequired
   };
   render = () => {
     return (
@@ -16,8 +16,8 @@ export default class FlightDetails extends React.Component {
         <FlightNumber value={this.props.number} />
         <From value={this.props.from} />
         <Destination value={this.props.destination} />
-        <Departure value={this.props.depart} />
-        <Arrival value={this.props.arrive} />
+        <Departure value={this.props.departureTime} />
+        <Arrival value={this.props.arrivalTime} />
       </div>
     );
   };

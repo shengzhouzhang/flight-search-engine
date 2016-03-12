@@ -9,16 +9,16 @@ export default class ResultItem extends React.Component {
   static propTypes = {
     _id: React.PropTypes.string.isRequired,
     airline: React.PropTypes.object.isRequired,
-    flight: React.PropTypes.object.isRequired,
-    return: React.PropTypes.object,
+    departureFlight: React.PropTypes.object.isRequired,
+    returnFlight: React.PropTypes.object,
     price: React.PropTypes.object.isRequired
   };
   render = () => {
     return (
       <div className={`search-result-item ${ this.props.return ? 'return' : 'one-way' }`}>
-        <Logo imageUri={this.props.airline.logoUri} />
-        <FlightDetails {...this.props.flight} />
-        { !!this.props.return ? (<FlightDetails {...this.props.return} />) : (undefined) }
+        <Logo imageUri={this.props.airline.logo.imageUri} />
+        <FlightDetails {...this.props.departureFlight} />
+        { !!this.props.returnFlight ? (<FlightDetails {...this.props.returnFlight} />) : (undefined) }
         <Price {...this.props.price} />
         <SelectButton onSelect={this.onSelectHandler} />
       </div>
