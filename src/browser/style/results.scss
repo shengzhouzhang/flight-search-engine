@@ -1,13 +1,35 @@
 
+$search-result-header-height: 80px;
 $search-result-item-height: 150px;
-$search-result-item-width: 800px;
+$search-result-item-width: 750px;
 $airline-logo-width: 180px;
-$flight-details-width: 130px;
+$flight-details-width: 120px;
 $flight-details-line-height: 20px;
 
 .search-results {
-  margin-left: $sidebar-width;
+  margin: $page-header-height 0 $search-result-header-height $sidebar-width;
   padding: 10px;
+
+  .result-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: $search-result-header-height;
+    padding: 0 10px;
+    margin-bottom: 15px;
+
+    h4 {
+      align-self: center;
+      font-size: 24px;
+      text-transform: capitalize;
+      font-weight: normal;
+    }
+
+    .search-query {
+      align-self: center;
+      text-transform: capitalize;
+    }
+  }
 
   .result-list {
     display: flex;
@@ -20,7 +42,7 @@ $flight-details-line-height: 20px;
       justify-content: space-between;
       align-self: center;
 
-      width: $search-result-item-width;
+      min-width: $search-result-item-width;
       height: $search-result-item-height;
       padding: 15px 10px;
       margin-bottom: 15px;

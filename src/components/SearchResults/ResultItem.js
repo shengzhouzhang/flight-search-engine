@@ -15,7 +15,7 @@ export default class ResultItem extends React.Component {
   };
   render = () => {
     return (
-      <div className={`search-result-item ${ this.props.return ? 'return' : 'one-way' }`}>
+      <div className={"search-result-item"}>
         <Logo imageUri={this.props.airline.logo.imageUri} />
         <FlightDetails {...this.props.departureFlight} />
         { !!this.props.returnFlight ? (<FlightDetails {...this.props.returnFlight} />) : (undefined) }

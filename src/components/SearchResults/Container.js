@@ -13,8 +13,7 @@ export default class Container extends React.Component {
     let items = this.state.result && this.state.result.items || null;
     return (
       <div className="search-results">
-        <Header />
-        { query ? (<SearchQuery {...query} />) : (undefined) }
+        { query ? (<Header query={query} />) : (undefined) }
         { items ? (<ResultList items={items} />) : (undefined) }
       </div>
     );
@@ -37,8 +36,16 @@ export default class Container extends React.Component {
 }
 
 export class Header extends React.Component {
+  static propTypes = {
+    query: React.PropTypes.object.isRequired
+  };
   render = () => {
-    return (<h4 className="header">your results</h4>);
+    return (
+      <div className="result-header">
+        <h4 className="header">your results</h4>
+        <SearchQuery {...this.props.query} />
+      </div>
+    );
   };
 }
 
@@ -50,10 +57,10 @@ export class SearchQuery extends React.Component {
   render = () => {
     return (
       <div className="search-query">
-        <div className="departure-date">{ moment(this.props.departureDate, 'YYYY-MM-DD').format('Do MMM YYYY') }</div>
+        <div className="departure-date">{ `depart: ${moment(this.props.departureDate, 'YYYY-MM-DD').format('Do MMM YYYY')}` }</div>
         {
           this.props.returnDate ?
-            (<div className="return-date">{ moment(this.props.returnDate, 'YYYY-MM-DD').format('Do MMM YYYY') }</div>) :
+            (<div className="return-date">{ `return: ${moment(this.props.returnDate, 'YYYY-MM-DD').format('Do MMM YYYY')}` }</div>) :
             (undefined)
         }
       </div>
