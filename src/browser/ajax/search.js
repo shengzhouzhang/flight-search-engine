@@ -1,6 +1,6 @@
 
-import Promise from 'bluebird';
+import request from '../../browser/ajax/request';
 
 export function search (query) {
-  return Promise.resolve([]);
+  return request('/api/tickets/search');
 }
