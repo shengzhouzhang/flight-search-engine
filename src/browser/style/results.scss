@@ -1,5 +1,77 @@
 
+$search-result-item-height: 150px;
+$search-result-item-width: 800px;
+$airline-logo-width: 180px;
+$flight-details-width: 130px;
+$flight-details-line-height: 20px;
+
 .search-results {
   margin-left: $sidebar-width;
   padding: 10px;
+
+  .result-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .search-result-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-self: center;
+
+      width: $search-result-item-width;
+      height: $search-result-item-height;
+      padding: 15px 10px;
+      margin-bottom: 15px;
+      border: 1px solid $border-color;
+
+      .airline-logo {
+        width: $airline-logo-width;
+        height: 100%;
+        margin-right: 10px;
+        background-color: $border-color;
+      }
+
+      .flight-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: $flight-details-width;
+        margin: 0 5px;
+
+        .flight-from,
+        .flight-destination,
+        .splitter {
+          display: inline-block;
+        }
+
+        .splitter {
+          margin: 0 10px;
+        }
+
+        .flight-departure,
+        .flight-arrival {
+          text-transform: capitalize;
+        }
+      }
+
+      .price {
+        align-self: center;
+        margin: 0 5px;
+        font-size: 24px;
+      }
+
+      .select-button {
+        align-self: center;
+        height: 50px;
+        margin-left: 10px;
+        padding: 0 10px;
+        font-size: 14px;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        text-transform: capitalize;
+      }
+    }
+  }
 }

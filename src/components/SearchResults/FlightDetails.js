@@ -14,8 +14,11 @@ export default class FlightDetails extends React.Component {
     return (
       <div className="flight-details">
         <FlightNumber value={this.props.number} />
-        <From value={this.props.from} />
-        <Destination value={this.props.destination} />
+        <div className="from-destination-wrapper">
+          <From value={this.props.from} />
+          <span className="splitter">&gt;</span>
+          <Destination value={this.props.destination} />
+        </div>
         <Departure value={this.props.departureTime} />
         <Arrival value={this.props.arrivalTime} />
       </div>
@@ -55,7 +58,7 @@ export class Departure extends React.Component {
     value: React.PropTypes.number.isRequired
   };
   render = () => {
-    return (<div className="flight-departure">{ moment(this.props.value).format('HH:mm A') }</div>);
+    return (<div className="flight-departure">{ `depart: ${moment(this.props.value).format('HH:mm A')}` }</div>);
   };
 }
 
@@ -64,6 +67,6 @@ export class Arrival extends React.Component {
     value: React.PropTypes.number.isRequired
   };
   render = () => {
-    return (<div className="flight-arrival">{ moment(this.props.value).format('HH:mm A') }</div>);
+    return (<div className="flight-arrival">{ `arrive: ${moment(this.props.value).format('HH:mm A')}` }</div>);
   };
 }
