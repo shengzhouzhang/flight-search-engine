@@ -25,7 +25,7 @@ export default class Container extends React.Component {
     return this.state.type === ticketTypes.ONEWAY;
   };
   isReturnSelected = () => {
-    return this.state.type === ticketTypes.RETURN
+    return this.state.type === ticketTypes.RETURN;
   };
   selectOneWay = () => {
     this.setState({ type: ticketTypes.ONEWAY });

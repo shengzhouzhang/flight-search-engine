@@ -8,6 +8,9 @@ import NumericInput from '../../components/SearchForm/NumericInput';
 import SubmitButton from '../../components/SearchForm/SubmitButton';
 import ticketTypes from '../../config/ticketTypes';
 
+import resultStore from '../../browser/stores/results';
+import { search } from '../../browser/repositories/search';
+
 export default class SearchForm extends React.Component {
   static propTypes = {
     type: React.PropTypes.oneOf([ ticketTypes.ONEWAY, ticketTypes.RETURN ]).isRequired
@@ -41,15 +44,20 @@ export default class SearchForm extends React.Component {
     switch(this.props.type) {
       case ticketTypes.ONEWAY:
         return this.buildQueryOneWay()
-          .then(query => console.log(query));
+          .then(query => this.onSearch(query));
         break;
       case ticketTypes.RETURN:
         return this.buildQueryReturn()
-          .then(query => console.log(query));
+          .then(query => this.onSearch(query));
         break;
       default:
         throw new Error(`invalid search form type: ${this.props.type}`);
     }
+  };
+  search = (query) => {
+    return search(query)
+      .then(results => resultStore.dispatch({ type: 'UPDATE', results: results }))
+      .catch(err => alert(err));
   };
   hasReturnFlight = () => {
     return this.props.type === ticketTypes.RETURN;
@@ -57,24 +65,13 @@ export default class SearchForm extends React.Component {
   buildQueryOneWay = () => {
     return Promise.resolve({
       type: ticketTypes.ONEWAY,
-      query: {
-        from: this.state.from,
-        destination: this.state.destination,
-        departureDate: this.state.departureDate,
-        passengers: this.state.passengers
-      }
+      ...this.state
     });
   };
   buildQueryReturn = () => {
     return Promise.resolve({
       type: ticketTypes.RETURN,
-      query: {
-        from: this.state.from,
-        destination: this.state.destination,
-        departureDate: this.state.departureDate,
-        returnDate: this.state.returnDate,
-        passengers: this.state.passengers
-      }
+      ...this.state
     });
   };
 }

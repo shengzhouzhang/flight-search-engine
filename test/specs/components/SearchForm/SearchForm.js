@@ -154,12 +154,10 @@ describe('SearchForm Component', () => {
         .then(query => {
           expect(query).to.eql({
             type: ticketTypes.ONEWAY,
-            query: {
-              from: 'PNQ',
-              destination: 'DEL',
-              departureDate: '2016-03-12',
-              passengers: 2
-            }
+            from: 'PNQ',
+            destination: 'DEL',
+            departureDate: '2016-03-12',
+            passengers: 2
           });
         });
     });
@@ -181,13 +179,11 @@ describe('SearchForm Component', () => {
         .then(query => {
           expect(query).to.eql({
             type: ticketTypes.RETURN,
-            query: {
-              from: 'PNQ',
-              destination: 'DEL',
-              departureDate: '2016-03-12',
-              returnDate: '2016-03-22',
-              passengers: 2
-            }
+            from: 'PNQ',
+            destination: 'DEL',
+            departureDate: '2016-03-12',
+            returnDate: '2016-03-22',
+            passengers: 2
           });
         });
     });
