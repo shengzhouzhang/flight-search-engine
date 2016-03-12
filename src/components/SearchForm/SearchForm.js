@@ -1,5 +1,6 @@
 
 import _ from 'lodash';
+import moment from 'moment';
 import Promise from 'bluebird';
 import React from 'react';
 import TextInput from '../../components/SearchForm/TextInput';
@@ -18,21 +19,39 @@ export default class SearchForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      from: null,
-      destination: null,
-      departureDate: null,
-      passengers: null
+      from: '',
+      destination: '',
+      departureDate: moment().format('YYYY-MM-DD'),
+      passengers: 1
     };
-    if (this.hasReturnFlight()) { this.state.returnDate = null; }
+    if (this.hasReturnFlight()) {
+      this.state.returnDate = moment().add(1, 'day').format('YYYY-MM-DD');
+    }
   };
   render = () => {
     return (
       <div className="search-form">
-        <TextInput fieldName="from" displayName="from" onChange={this.onChangeHandler} />
-        <TextInput fieldName="destination" displayName="destination" onChange={this.onChangeHandler} />
-        <DateInput fieldName="departureDate" displayName="departure date" onChange={this.onChangeHandler} />
-        { this.hasReturnFlight() ? (<DateInput fieldName="returnDate" displayName="return date" onChange={this.onChangeHandler} />) : (undefined) }
-        <NumericInput fieldName="passengers" displayName="passengers" onChange={this.onChangeHandler} />
+        <TextInput fieldName="from" displayName="from"
+          value={this.state.from} onChange={this.onChangeHandler}
+        />
+        <TextInput fieldName="destination" displayName="destination"
+          value={this.state.destination} onChange={this.onChangeHandler}
+        />
+        <DateInput fieldName="departureDate" displayName="departure date"
+          value={this.state.departureDate} onChange={this.onChangeHandler}
+        />
+        {
+          this.hasReturnFlight() ?
+            (
+              <DateInput fieldName="returnDate" displayName="return date"
+                value={this.state.returnDate} onChange={this.onChangeHandler}
+              />
+            ) :
+            (undefined)
+        }
+        <NumericInput fieldName="passengers" displayName="passengers"
+          value={this.state.passengers} onChange={this.onChangeHandler}
+        />
         <SubmitButton onSubmit={this.onSubmitHandler} />
       </div>
     );
@@ -44,11 +63,11 @@ export default class SearchForm extends React.Component {
     switch(this.props.type) {
       case ticketTypes.ONEWAY:
         return this.buildQueryOneWay()
-          .then(query => this.onSearch(query));
+          .then(query => this.search(query));
         break;
       case ticketTypes.RETURN:
         return this.buildQueryReturn()
-          .then(query => this.onSearch(query));
+          .then(query => this.search(query));
         break;
       default:
         throw new Error(`invalid search form type: ${this.props.type}`);
@@ -60,21 +79,43 @@ export default class SearchForm extends React.Component {
         type: 'UPDATE',
         results: { query: query, tickets: results }
       }))
-      .catch(err => alert(err));
+      .catch(err => console.error(err));
   };
   hasReturnFlight = () => {
     return this.props.type === ticketTypes.RETURN;
   };
   buildQueryOneWay = () => {
-    return Promise.resolve({
+    let query = {
       type: ticketTypes.ONEWAY,
-      ...this.state
-    });
+      from: this.state.from,
+      destination: this.state.destination,
+      departureDate: this.state.departureDate,
+      passengers: this.state.passengers
+    };
+
+    if (!query.from) { return Promise.reject(new Error('invalid input from')); }
+    if (!query.destination) { return Promise.reject(new Error('invalid input destination')); }
+    if (!query.departureDate) { return Promise.reject(new Error('invalid input departure date')); }
+    if (!query.passengers) { return Promise.reject(new Error('invalid input passengers')); }
+
+    return Promise.resolve(query);
   };
   buildQueryReturn = () => {
-    return Promise.resolve({
+    let query = {
       type: ticketTypes.RETURN,
-      ...this.state
-    });
+      from: this.state.from,
+      destination: this.state.destination,
+      departureDate: this.state.departureDate,
+      returnDate: this.state.returnDate,
+      passengers: this.state.passengers
+    };
+
+    if (!query.from) { return Promise.reject(new Error('invalid input from')); }
+    if (!query.destination) { return Promise.reject(new Error('invalid input destination')); }
+    if (!query.departureDate) { return Promise.reject(new Error('invalid input departure date')); }
+    if (!query.returnDate) { return Promise.reject(new Error('invalid input return date')); }
+    if (!query.passengers) { return Promise.reject(new Error('invalid input passengers')); }
+
+    return Promise.resolve(query);
   };
 }

@@ -5,13 +5,14 @@ export default class TextInput extends React.Component {
   static propTypes = {
     fieldName: React.PropTypes.string.isRequired,
     displayName: React.PropTypes.string.isRequired,
+    value: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func.isRequired,
   };
   render = () => {
     return (
       <div className="text-input form-item">
         <label>{ this.props.displayName }</label>
-        <input type="text" onChange={this.onChangeHandler} />
+        <input type="text" value={this.props.value} onChange={this.onChangeHandler} />
       </div>
     );
   };
