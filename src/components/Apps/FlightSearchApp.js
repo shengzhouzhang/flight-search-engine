@@ -30,11 +30,11 @@ export default class FlightSearchApp extends React.Component {
   }
   subscribeResultStore = () => {
     this.unsubscribeResultStore = resultStore.subscribe(() => {
-      let results = resultStore.getState();
-      this.onResultStoreChange(results);
+      let result = resultStore.getState();
+      this.onResultStoreChange(result);
     });
   };
-  onResultStoreChange = (results = {}) => {
-    return this.setState({ showPriceSlider: results.tickets && results.tickets.length > 0 });
+  onResultStoreChange = (result = {}) => {
+    return this.setState({ showPriceSlider: result.items && result.items.length > 0 });
   };
 }

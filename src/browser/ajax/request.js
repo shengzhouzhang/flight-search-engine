@@ -3,8 +3,6 @@ import _ from 'lodash';
 import Promise from 'bluebird';
 import superagent from 'superagent';
 
-const BASE_URI = 'http://localhost:8080/';
-
 export function GET (uri, query) {
   return new Promise((resolve, reject) => {
     superagent

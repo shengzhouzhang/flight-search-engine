@@ -75,11 +75,8 @@ export default class SearchForm extends React.Component {
   };
   search = (query) => {
     return search(query)
-      .then(results => resultStore.dispatch({
-        type: 'UPDATE',
-        results: { query: query, tickets: results }
-      }))
-      .catch(err => console.error(err));
+      .then(result => resultStore.dispatch({ type: 'UPDATE', result: result }))
+      .catch(err => console.error(err.stack));
   };
   hasReturnFlight = () => {
     return this.props.type === ticketTypes.RETURN;

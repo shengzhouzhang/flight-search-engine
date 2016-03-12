@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 export function reducer (previous = null, action) {
   switch (action.type) {
     case 'UPDATE':
-      return action.results;
+      return action.result;
     default:
       return previous;
   }

@@ -6,16 +6,16 @@ import resultStore from '../../browser/stores/results';
 
 export default class Container extends React.Component {
   state = {
-    results: resultStore.getState()
+    result: resultStore.getState()
   };
   render = () => {
-    let query = this.state.results && this.props.results.query || null;
-    let tickets = this.state.results && this.props.results.tickets || null;
+    let query = this.state.result && this.state.result.query || null;
+    let items = this.state.result && this.state.result.items || null;
     return (
       <div className="search-results">
         <Header />
         { query ? (<SearchQuery {...query} />) : (undefined) }
-        { tickets ? (<ResultList items={tickets} />) : (undefined) }
+        { items ? (<ResultList items={items} />) : (undefined) }
       </div>
     );
   };
@@ -27,12 +27,12 @@ export default class Container extends React.Component {
   };
   subscribeResultStore = () => {
     this.unsubscribeResultStore = resultStore.subscribe(() => {
-      let results = resultStore.getState();
-      this.onResultStoreChange(results);
+      let result = resultStore.getState();
+      this.onResultStoreChange(result);
     });
   };
-  onResultStoreChange = (results = {}) => {
-    this.setState({ ...results });
+  onResultStoreChange = (result = {}) => {
+    this.setState({ result });
   };
 }
 
@@ -44,16 +44,16 @@ export class Header extends React.Component {
 
 export class SearchQuery extends React.Component {
   static propTypes = {
-    departureDate: React.PropTypes.number.isRequired,
-    returnDate: React.PropTypes.number,
+    departureDate: React.PropTypes.string.isRequired,
+    returnDate: React.PropTypes.string,
   };
   render = () => {
     return (
       <div className="search-query">
-        <div className="departure-date">{ moment(this.props.departureDate).format('Do MMM YYYY') }</div>
+        <div className="departure-date">{ moment(this.props.departureDate, 'YYYY-MM-DD').format('Do MMM YYYY') }</div>
         {
           this.props.returnDate ?
-            (<div className="return-date">{ moment(this.props.returnDate).format('Do MMM YYYY') }</div>) :
+            (<div className="return-date">{ moment(this.props.returnDate, 'YYYY-MM-DD').format('Do MMM YYYY') }</div>) :
             (undefined)
         }
       </div>
