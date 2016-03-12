@@ -9,7 +9,7 @@ export default class DateInput extends React.Component {
   };
   render = () => {
     return (
-      <div className="date-input">
+      <div className="date-input form-item">
         <label>{ this.props.displayName }</label>
         <input type="date" onChange={this.onChangeHandler} />
       </div>

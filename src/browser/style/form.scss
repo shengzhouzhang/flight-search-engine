@@ -1,0 +1,73 @@
+
+$form-tab-width: 100px;
+$form-tab-height: 30px;
+$form-tab-radius: $form-tab-height / 2;
+$from-line-height: 25px;
+
+.form-container {
+
+  .form-header {
+    position: relative;
+    display: flex;
+
+    .tab-button  {
+      display: inline-block;
+      width: $form-tab-width;
+      height: $form-tab-height;
+      line-height: $form-tab-height;
+      border: 1px solid $border-color;
+      border-bottom: none;
+      border-top-left-radius: $form-tab-radius;
+      border-top-right-radius: $form-tab-radius;
+      text-align: center;
+      margin-right: -5px;
+      background-color: #fff;
+      cursor: pointer;
+      z-index: 0;
+
+      &.selected {
+        z-index: 1;
+      }
+    }
+  }
+
+  .form-body {
+    border: 1px solid $border-color;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+
+    label {
+      text-transform: capitalize;
+    }
+
+    input {
+      border: 1px solid $border-color;
+    }
+
+    label,
+    input {
+      display: block;
+      width: 100%;
+      height: $from-line-height;
+      line-height: $from-line-height;
+      text-align: left;
+    }
+
+    .form-item {
+      margin-bottom: 15px;
+    }
+
+    .submit-button {
+      width: 80%;
+      height: $from-line-height * 1.5;
+      line-height: $from-line-height * 1.5;
+      text-transform: capitalize;
+      border: 1px solid $border-color;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      margin: 15px auto 20px auto;
+    }
+  }
+}

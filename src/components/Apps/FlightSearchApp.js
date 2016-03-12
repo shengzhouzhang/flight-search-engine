@@ -14,8 +14,10 @@ export default class FlightSearchApp extends React.Component {
     return (
       <div className="flight-search-app">
         <PageHeader />
-        <SearchForm />
-        { this.state.showPriceSlider ? (<PriceSlider />) : (undefined) }
+        <div className="sidebar">
+          <SearchForm />
+          { this.state.showPriceSlider ? (<PriceSlider />) : (undefined) }
+        </div>
         <SearchResults />
       </div>
     );

@@ -1,0 +1,12 @@
+
+$sidebar-width: 250px;
+
+.sidebar {
+  position: fixed;
+  top: $page-header-height;
+  left: 0;
+  bottom: 0;
+  width: $sidebar-width;
+  border-right: 1px solid $border-color;
+  padding: 20px 10px;
+}

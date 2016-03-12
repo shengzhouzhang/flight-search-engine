@@ -1,0 +1,13 @@
+
+$page-header-height: 100px;
+
+.page-header {
+  width: 100%;
+  height: $page-header-height;
+  line-height: $page-header-height;
+
+  font-size: 28px;
+  padding: 0 20px;
+  text-transform: capitalize;
+  border-bottom: 1px solid $border-color;
+}

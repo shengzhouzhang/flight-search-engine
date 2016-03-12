@@ -9,7 +9,7 @@ export default class TextInput extends React.Component {
   };
   render = () => {
     return (
-      <div className="text-input">
+      <div className="text-input form-item">
         <label>{ this.props.displayName }</label>
         <input type="text" onChange={this.onChangeHandler} />
       </div>
