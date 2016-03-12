@@ -1,7 +1,6 @@
 
-import request from '../../browser/ajax/request';
+import { GET } from '../../browser/ajax/request';
 
 export function search (query) {
-  console.log(query);
-  return request('/api/tickets/search');
+  return GET('/api/tickets/search', query);
 }
