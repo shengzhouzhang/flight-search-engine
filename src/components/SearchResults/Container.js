@@ -2,20 +2,37 @@
 import React from 'react';
 import moment from 'moment';
 import ResultList from '../../components/SearchResults/ResultList';
+import resultStore from '../../browser/stores/results';
 
-export default class SearchResults extends React.Component {
-  static propTypes = {
-    query: React.PropTypes.object.isRequired,
-    results: React.PropTypes.array.isRequired,
+export default class Container extends React.Component {
+  state = {
+    results: resultStore.getState()
   };
   render = () => {
+    let query = this.state.results && this.props.results.query || null;
+    let tickets = this.state.results && this.props.results.tickets || null;
     return (
       <div className="search-results">
         <Header />
-        <SearchQuery {...this.props.query} />
-        <ResultList items={this.props.results} />
+        { query ? (<SearchQuery {...query} />) : (undefined) }
+        { tickets ? (<ResultList items={tickets} />) : (undefined) }
       </div>
     );
+  };
+  componentDidMount = () => {
+    this.subscribeResultStore();
+  };
+  componentWillUnmount = () => {
+    this.unsubscribeResultStore();
+  };
+  subscribeResultStore = () => {
+    this.unsubscribeResultStore = resultStore.subscribe(() => {
+      let results = resultStore.getState();
+      this.onResultStoreChange(results);
+    });
+  };
+  onResultStoreChange = (results = {}) => {
+    this.setState({ ...results });
   };
 }
 

@@ -108,31 +108,31 @@ describe('Search Result Item Component', () => {
     expect(wrapper.hasClass('return')).to.eql(true);
   });
 
-  it('should trigger onSelect handler and provide _id', () => {
-    const RESULT_ITEN_PROPS = {
-      _id: 'TEST_ID',
-      airline: { logoUri: 'LOGO_URI' },
-      flight: {
-        number: 'AI-202',
-        from: 'PNQ',
-        destination: 'DEL',
-        depart: moment('2014-01-01 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
-        arrive: moment('2014-01-01 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
-      },
-      return: {
-        number: 'AI-203',
-        from: 'PNQ',
-        destination: 'DEL',
-        depart: moment('2014-01-10 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
-        arrive: moment('2014-01-10 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
-      },
-      price: { symbol: '£', value: 125 },
-      onSelect: sinon.spy()
-    };
-    let wrapper = shallow(<ResultItem {...RESULT_ITEN_PROPS} />);
-    expect(wrapper.contains(<SelectButton onSelect={wrapper.instance().onSelectHandler} />)).to.eql(true);
-    wrapper.instance().onSelectHandler();
-    expect(RESULT_ITEN_PROPS.onSelect.called).to.eql(true);
-    expect(RESULT_ITEN_PROPS.onSelect.getCall(0).args[0]).to.eql(RESULT_ITEN_PROPS._id);
-  });
+  // it('should trigger onSelect handler and provide _id', () => {
+  //   const RESULT_ITEN_PROPS = {
+  //     _id: 'TEST_ID',
+  //     airline: { logoUri: 'LOGO_URI' },
+  //     flight: {
+  //       number: 'AI-202',
+  //       from: 'PNQ',
+  //       destination: 'DEL',
+  //       depart: moment('2014-01-01 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
+  //       arrive: moment('2014-01-01 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
+  //     },
+  //     return: {
+  //       number: 'AI-203',
+  //       from: 'PNQ',
+  //       destination: 'DEL',
+  //       depart: moment('2014-01-10 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
+  //       arrive: moment('2014-01-10 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
+  //     },
+  //     price: { symbol: '£', value: 125 },
+  //     onSelect: sinon.spy()
+  //   };
+  //   let wrapper = shallow(<ResultItem {...RESULT_ITEN_PROPS} />);
+  //   expect(wrapper.contains(<SelectButton onSelect={wrapper.instance().onSelectHandler} />)).to.eql(true);
+  //   wrapper.instance().onSelectHandler();
+  //   expect(RESULT_ITEN_PROPS.onSelect.called).to.eql(true);
+  //   expect(RESULT_ITEN_PROPS.onSelect.getCall(0).args[0]).to.eql(RESULT_ITEN_PROPS._id);
+  // });
 });

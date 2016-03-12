@@ -11,8 +11,7 @@ export default class ResultItem extends React.Component {
     airline: React.PropTypes.object.isRequired,
     flight: React.PropTypes.object.isRequired,
     return: React.PropTypes.object,
-    price: React.PropTypes.object.isRequired,
-    onSelect: React.PropTypes.func.isRequired
+    price: React.PropTypes.object.isRequired
   };
   render = () => {
     return (
@@ -26,6 +25,6 @@ export default class ResultItem extends React.Component {
     );
   };
   onSelectHandler = () => {
-    this.props.onSelect(this.props._id);
+    console.log(this.props._id);
   };
 }

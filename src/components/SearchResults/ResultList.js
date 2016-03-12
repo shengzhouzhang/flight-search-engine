@@ -14,5 +14,5 @@ export default class ResultList extends React.Component {
     return (
       <div className="result-list">{ items }</div>
     );
-  }
+  };
 }

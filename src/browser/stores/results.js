@@ -1,7 +1,7 @@
 
 import { createStore } from 'redux';
 
-export function reducer (previous = [], action) {
+export function reducer (previous = null, action) {
   switch (action.type) {
     case 'UPDATE':
       return action.results;

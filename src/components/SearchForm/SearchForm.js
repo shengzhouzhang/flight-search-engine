@@ -9,7 +9,7 @@ import SubmitButton from '../../components/SearchForm/SubmitButton';
 import ticketTypes from '../../config/ticketTypes';
 
 import resultStore from '../../browser/stores/results';
-import { search } from '../../browser/repositories/search';
+import { search } from '../../browser/ajax/search';
 
 export default class SearchForm extends React.Component {
   static propTypes = {
@@ -56,7 +56,10 @@ export default class SearchForm extends React.Component {
   };
   search = (query) => {
     return search(query)
-      .then(results => resultStore.dispatch({ type: 'UPDATE', results: results }))
+      .then(results => resultStore.dispatch({
+        type: 'UPDATE',
+        results: { query: query, tickets: results }
+      }))
       .catch(err => alert(err));
   };
   hasReturnFlight = () => {

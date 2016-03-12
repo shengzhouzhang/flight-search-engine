@@ -1,4 +1,4 @@
 
-import SearchResults from '../../components/SearchResults/SearchResults';
+import Container from '../../components/SearchResults/Container';
 
-export default SearchResults;
+export default Container;
