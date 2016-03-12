@@ -1,0 +1,23 @@
+
+import React from 'react';
+import sinon from 'sinon';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
+
+import PageHeader from '../../../../src/components/PageHeader';
+
+describe('PageHeader Component', () => {
+
+  describe('render function', () => {
+
+    it('should show title', () => {
+      let wrapper = shallow(<PageHeader />);
+      expect(wrapper.text()).to.eql('flight search engine');
+    });
+
+    it('should have the page-header class', () => {
+      let wrapper = shallow(<PageHeader />);
+      expect(wrapper.hasClass('page-header')).to.eql(true);
+    });
+  });
+});
