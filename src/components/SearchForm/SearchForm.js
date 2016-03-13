@@ -16,46 +16,64 @@ export class SearchFormOneWay extends React.Component {
     onSearch: React.PropTypes.func.isRequired
   };
   state = {
-    from: '',
-    destination: '',
-    departureDate: moment().format('YYYY-MM-DD'),
-    passengers: 1
+    fields: {
+      from: '',
+      destination: '',
+      departureDate: moment().format('YYYY-MM-DD'),
+      passengers: 1
+    },
+    errors: {
+      from: false,
+      destination: false,
+      departureDate: false,
+      passengers: false
+    }
   };
   render = () => {
     return (
       <div className="search-form">
         <TextInput fieldName="from" displayName="from"
-          value={this.state.from} onChange={this.onChangeHandler} />
+          value={this.state.fields.from} hasError={this.state.errors.from}
+          onChange={this.onChangeHandler} />
         <TextInput fieldName="destination" displayName="destination"
-          value={this.state.destination} onChange={this.onChangeHandler} />
+          value={this.state.fields.destination} hasError={this.state.errors.destination}
+          onChange={this.onChangeHandler} />
         <DateInput fieldName="departureDate" displayName="departure date"
-          value={this.state.departureDate} onChange={this.onChangeHandler} />
+          value={this.state.fields.departureDate} hasError={this.state.errors.departureDate}
+          onChange={this.onChangeHandler} />
         <NumericInput fieldName="passengers" displayName="passengers"
-          value={this.state.passengers} onChange={this.onChangeHandler} />
+          value={this.state.fields.passengers} hasError={this.state.errors.passengers}
+          onChange={this.onChangeHandler} />
         <SubmitButton onSubmit={this.onSubmitHandler} />
       </div>
     );
   };
-  onChangeHandler = (fields) => {
-    this.setState(fields);
+  onChangeHandler = (fieldName, value) => {
+    let fields = { ...this.state.fields };
+    fields[fieldName] = value;
+    let errors = { ...this.state.errors };
+    errors[fieldName] = false;
+    this.setState({ fields, errors });
   };
   onSubmitHandler = () => {
-    return this.buildQuery()
-      .then(query => this.props.onSearch(query));
+    if (this.isValid(this.state.fields)) {
+      this.props.onSearch(new SearchQueryOneWay(
+        Currency.fromJson(currencyTypes.GBP),
+        this.state.fields.from,
+        this.state.fields.destination,
+        this.state.fields.departureDate,
+        this.state.fields.passengers
+      ));
+    }
   };
-  buildQuery = () => {
-    let query = new SearchQueryOneWay(
-      Currency.fromJson(currencyTypes.GBP),
-      this.state.from,
-      this.state.destination,
-      this.state.departureDate,
-      this.state.passengers
-    );
-    if (!query.from) { return Promise.reject(new Error('invalid input from')); }
-    if (!query.destination) { return Promise.reject(new Error('invalid input destination')); }
-    if (!query.departureDate) { return Promise.reject(new Error('invalid input departure date')); }
-    if (!query.passengers) { return Promise.reject(new Error('invalid input passengers')); }
-    return Promise.resolve(query);
+  isValid = (fields) => {
+    let hasError = false;
+    if (!fields.from) { this.state.errors.from = true; hasError = true; }
+    if (!fields.destination) { this.state.errors.destination = true; hasError = true; }
+    if (!fields.departureDate) { this.state.errors.departureDate = true; hasError = true; }
+    if (!fields.passengers) { this.state.errors.passengers = true; hasError = true; }
+    if (hasError) { this.forceUpdate(); }
+    return !hasError;
   };
 }
 
@@ -64,50 +82,70 @@ export class SearchFormReturn extends React.Component {
     onSearch: React.PropTypes.func.isRequired
   };
   state = {
-    from: '',
-    destination: '',
-    departureDate: moment().format('YYYY-MM-DD'),
-    returnDate: moment().add(1, 'day').format('YYYY-MM-DD'),
-    passengers: 1
+    fields: {
+      from: '',
+      destination: '',
+      departureDate: moment().format('YYYY-MM-DD'),
+      returnDate: moment().add(1, 'day').format('YYYY-MM-DD'),
+      passengers: 1
+    },
+    errors: {
+      from: false,
+      destination: false,
+      departureDate: false,
+      returnDate: false,
+      passengers: false
+    }
   };
   render = () => {
     return (
       <div className="search-form">
         <TextInput fieldName="from" displayName="from"
-          value={this.state.from} onChange={this.onChangeHandler} />
+          value={this.state.fields.from} hasError={this.state.errors.from}
+          onChange={this.onChangeHandler} />
         <TextInput fieldName="destination" displayName="destination"
-          value={this.state.destination} onChange={this.onChangeHandler} />
+          value={this.state.fields.destination} hasError={this.state.errors.destination}
+          onChange={this.onChangeHandler} />
         <DateInput fieldName="departureDate" displayName="departure date"
-          value={this.state.departureDate} onChange={this.onChangeHandler} />
+          value={this.state.fields.departureDate} hasError={this.state.errors.departureDate}
+          onChange={this.onChangeHandler} />
         <DateInput fieldName="returnDate" displayName="return date"
-          value={this.state.returnDate} onChange={this.onChangeHandler} />
+          value={this.state.fields.returnDate} hasError={this.state.errors.returnDate}
+          onChange={this.onChangeHandler} />
         <NumericInput fieldName="passengers" displayName="passengers"
-          value={this.state.passengers} onChange={this.onChangeHandler} />
+          value={this.state.fields.passengers} hasError={this.state.errors.passengers}
+          onChange={this.onChangeHandler} />
         <SubmitButton onSubmit={this.onSubmitHandler} />
       </div>
     );
   };
-  onChangeHandler = (fields) => {
-    this.setState(fields);
+  onChangeHandler = (fieldName, value) => {
+    let fields = { ...this.state.fields };
+    fields[fieldName] = value;
+    let errors = { ...this.state.errors };
+    errors[fieldName] = false;
+    this.setState({ fields, errors });
   };
   onSubmitHandler = () => {
-    return this.buildQuery()
-      .then(query => this.props.onSearch(query));
+    if (this.isValid(this.state.fields)) {
+      this.props.onSearch(new SearchQueryReturn(
+        Currency.fromJson(currencyTypes.GBP),
+        this.state.fields.from,
+        this.state.fields.destination,
+        this.state.fields.departureDate,
+        this.state.fields.returnDate,
+        this.state.fields.passengers
+      ));
+    }
   };
-  buildQuery = () => {
-    let query = new SearchQueryReturn(
-      Currency.fromJson(currencyTypes.GBP),
-      this.state.from,
-      this.state.destination,
-      this.state.departureDate,
-      this.state.returnDate,
-      this.state.passengers
-    );
-    if (!query.from) { return Promise.reject(new Error('invalid input from')); }
-    if (!query.destination) { return Promise.reject(new Error('invalid input destination')); }
-    if (!query.departureDate) { return Promise.reject(new Error('invalid input departure date')); }
-    if (!query.returnDate) { return Promise.reject(new Error('invalid input return date')); }
-    if (!query.passengers) { return Promise.reject(new Error('invalid input passengers')); }
-    return Promise.resolve(query);
+  isValid = (fields) => {
+    let hasError = false;
+    if (!fields.from) { this.state.errors.from = true; hasError = true; }
+    if (!fields.destination) { this.state.errors.destination = true; hasError = true; }
+    if (!fields.departureDate) { this.state.errors.departureDate = true; hasError = true; }
+    if (!fields.returnDate) { this.state.errors.returnDate = true; hasError = true; }
+    if (!fields.passengers || fields.passengers <= 0) { this.state.errors.passengers = true; hasError = true; }
+    if (hasError) { this.forceUpdate(); }
+    return !hasError;
   };
 }

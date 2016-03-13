@@ -65,6 +65,10 @@ $from-line-height: 25px;
 
     .form-item {
       margin-bottom: 15px;
+
+      &.error > input {
+        background-color: yellow;
+      }
     }
 
     .submit-button {
