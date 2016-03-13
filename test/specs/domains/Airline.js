@@ -7,19 +7,16 @@ describe('Airline Domain', () => {
   describe('constructor', () => {
 
     it('should set logo image uri', () => {
-      const IMAGE_URI = 'IMAGE_URI';
-      let airline = new Airline(IMAGE_URI);
-      expect(airline.logo.imageUri).to.eql(IMAGE_URI);
+      const AIRLINE = { logo: { imageUri: 'IMAGE_URI' }};
+      expect(new Airline(AIRLINE.logo.imageUri)).to.eql(AIRLINE);
     });
   });
 
   describe('fromJson function', () => {
 
     it('should construct an object from Json', () => {
-      const IMAGE_URI = 'IMAGE_URI';
-      const RAW = { logo: { imageUri: IMAGE_URI }};
-      let airline = Airline.fromJson(RAW);
-      expect(airline).to.eql(new Airline(IMAGE_URI));
+      const AIRLINE = { logo: { imageUri: 'IMAGE_URI' }};
+      expect(Airline.fromJson(AIRLINE)).to.eql(new Airline(AIRLINE.logo.imageUri));
     });
   });
 });

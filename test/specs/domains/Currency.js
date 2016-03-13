@@ -9,9 +9,7 @@ describe('Currency Domain', () => {
 
     it('should set code and symbol', () => {
       const CURRENCY = currencyTypes.GBP;
-      let currency = new Currency(CURRENCY.code, CURRENCY.symbol);
-      expect(currency.code).to.eql(CURRENCY.code);
-      expect(currency.symbol).to.eql(CURRENCY.symbol);
+      expect(new Currency(CURRENCY.code, CURRENCY.symbol)).to.eql(CURRENCY);
     });
   });
 
@@ -19,8 +17,7 @@ describe('Currency Domain', () => {
 
     it('should construct an object from Json', () => {
       const RAW = currencyTypes.GBP;
-      let currency = Currency.fromJson(RAW);
-      expect(currency).to.eql(new Currency(RAW.code, RAW.symbol));
+      expect(Currency.fromJson(RAW)).to.eql(new Currency(RAW.code, RAW.symbol));
     });
   });
 });
