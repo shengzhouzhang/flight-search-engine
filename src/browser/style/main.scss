@@ -10,6 +10,8 @@ $font-color: #333;
   border: none;
   box-shadow: none;
   background-color: transparent;
+  font-size: 14px;
+  font-weight: normal;
   color: $font-color;
 }
 
@@ -21,4 +23,5 @@ $font-color: #333;
 @import './header.scss';
 @import './sidebar.scss';
 @import './form.scss';
+@import './slider.scss';
 @import './results.scss';
