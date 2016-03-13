@@ -7,6 +7,6 @@ export default class Price extends React.Component {
     value: React.PropTypes.number.isRequired,
   };
   render = () => {
-    return (<div className="price">{ `${this.props.symbol} ${this.props.value.toFixed(2)}` }</div>);
+    return (<div className="price">{ `${this.props.symbol}${this.props.value.toFixed(2)}` }</div>);
   };
 }

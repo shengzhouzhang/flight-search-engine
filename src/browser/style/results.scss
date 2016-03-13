@@ -47,7 +47,8 @@ $flight-details-line-height: 20px;
       padding: 15px 10px;
       margin-bottom: 15px;
       border: 1px solid $border-color;
-
+      background-color: $background-color-light;
+      
       .airline-logo {
         width: $airline-logo-width;
         height: 100%;

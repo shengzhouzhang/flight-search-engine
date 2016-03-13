@@ -6,7 +6,8 @@ $price-slider-line-height: 25px;
   height: $price-slider-height;
   border: 1px solid $border-color;
   padding: 10px;
-
+  background: $background-color-light;
+  
   &.hidden {
     display: none;
   }

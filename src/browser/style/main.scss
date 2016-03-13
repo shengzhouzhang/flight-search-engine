@@ -1,6 +1,8 @@
 
 $border-color: #e8e8e8;
 $font-color: #333;
+$background-color-default: #fcfcfc;
+$background-color-light: #ffffff;
 
 * {
   box-sizing: border-box;
@@ -13,6 +15,10 @@ $font-color: #333;
   font-size: 14px;
   font-weight: normal;
   color: $font-color;
+}
+
+body {
+  background: $background-color-default;
 }
 
 .app-container {

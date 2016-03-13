@@ -24,14 +24,14 @@ $from-line-height: 25px;
       text-align: center;
 
       margin-right: -5px;
-      background-color: #fff;
+      background-color: $background-color-light;
       cursor: pointer;
       z-index: 0;
 
       &::first-letter {
         text-transform: capitalize;
       }
-      
+
       &.selected {
         z-index: 1;
       }
@@ -43,6 +43,7 @@ $from-line-height: 25px;
     padding: 10px;
     font-size: 14px;
     text-align: center;
+    background-color: $background-color-light;
 
     label {
       text-transform: capitalize;
