@@ -9,7 +9,7 @@ import SearchForm from '../../../../src/components/SearchForm/SearchForm';
 import Container from '../../../../src/components/SearchForm/Container';
 import ticketTypes from '../../../../src/config/ticketTypes';
 
-describe('Container Component', () => {
+describe('Search Form Container Component', () => {
 
   describe('initial state', () => {
     let wrapper = shallow(<Container />);
@@ -66,9 +66,9 @@ describe('Container Component', () => {
 
   describe('isReturnSelected function', () => {
 
-    it('should return false if type is one way', () => {
+    it('should return false if ticketType is one way', () => {
       let wrapper = shallow(<Container />);
-      wrapper.setState({ type: ticketTypes.ONEWAY });
+      wrapper.setState({ ticketType: ticketTypes.ONEWAY });
       expect(wrapper.instance().isReturnSelected()).to.eql(false);
     });
 
