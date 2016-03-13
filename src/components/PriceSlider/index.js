@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactSlider from 'react-slider';
 import resultStore from '../../browser/stores/results';
+import filterStore from '../../browser/stores/filter';
 
 export default class PriceSlider extends React.Component {
   state = {
@@ -54,5 +55,6 @@ export default class PriceSlider extends React.Component {
   };
   onChangeHandler = (values) => {
     this.setState({ values: values });
+    filterStore.dispatch({ type: 'UPDATE', filter: { min: values[0], max: values[1] }});
   };
 }

@@ -7,7 +7,6 @@ export function search (query) {
   return GET('/api/flights/search', query)
     .then(raw => parseRawToEntity(raw))
     .then(result => {
-      console.log(result);
       return result;
     });
 }
