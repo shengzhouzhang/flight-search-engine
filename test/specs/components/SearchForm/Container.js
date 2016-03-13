@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import TabButton from '../../../../src/components/SearchForm/TabButton';
-import SearchForm from '../../../../src/components/SearchForm/SearchForm';
+import { SearchFormOneWay, SearchFormReturn } from '../../../../src/components/SearchForm/SearchForm';
 import Container from '../../../../src/components/SearchForm/Container';
 import ticketTypes from '../../../../src/config/ticketTypes';
 
@@ -26,7 +26,7 @@ describe('Search Form Container Component', () => {
       expect(wrapper.contains(
         <TabButton name="return" selected={true} onSelect={wrapper.instance().selectReturn} />
       )).to.eql(true);
-      expect(wrapper.contains(<SearchForm ticketType={ticketTypes.RETURN} />)).to.eql(true);
+      expect(wrapper.find(SearchFormReturn)).to.have.length(1);
     });
 
     it('should show selected one way tab, unselected return tab, and one way search form', () => {
@@ -38,7 +38,7 @@ describe('Search Form Container Component', () => {
       expect(wrapper.contains(
         <TabButton name="return" selected={false} onSelect={wrapper.instance().selectReturn} />
       )).to.eql(true);
-      expect(wrapper.contains(<SearchForm ticketType={ticketTypes.ONEWAY} />)).to.eql(true);
+      expect(wrapper.find(SearchFormOneWay)).to.have.length(1);
     });
 
     it('should have the form-container, form-header, and form-body classes', () => {
