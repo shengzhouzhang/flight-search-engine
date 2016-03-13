@@ -1,13 +1,15 @@
 
+import Currency from '../domains/Currency';
+
 export default class Price {
   static fromJson = (raw = {}) => {
     return new Price(
-      raw.symbol,
+      Currency.fromJson(raw.currency),
       raw.value
     );
   };
-  constructor (symbol, value) {
-    this.symbol = symbol;
+  constructor (currency, value) {
+    this.currency = currency;
     this.value = value;
   };
 }

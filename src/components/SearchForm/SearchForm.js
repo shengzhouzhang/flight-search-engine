@@ -8,13 +8,16 @@ import DateInput from '../../components/SearchForm/DateInput';
 import NumericInput from '../../components/SearchForm/NumericInput';
 import SubmitButton from '../../components/SearchForm/SubmitButton';
 import ticketTypes from '../../config/ticketTypes';
+import currencyTypes from '../../config/currencyTypes';
 
 import resultStore from '../../browser/stores/results';
+import { SearchQueryOneWay, SearchQueryReturn } from '../../domains/SearchQuery' ;
+
 import { search } from '../../browser/ajax/search';
 
 export default class SearchForm extends React.Component {
   static propTypes = {
-    type: React.PropTypes.oneOf([ ticketTypes.ONEWAY, ticketTypes.RETURN ]).isRequired
+    ticketType: React.PropTypes.oneOf([ ticketTypes.ONEWAY, ticketTypes.RETURN ]).isRequired
   };
   constructor (props) {
     super(props);
@@ -60,7 +63,7 @@ export default class SearchForm extends React.Component {
     this.setState(fields);
   };
   onSubmitHandler = () => {
-    switch(this.props.type) {
+    switch(this.props.ticketType) {
       case ticketTypes.ONEWAY:
         return this.buildQueryOneWay()
           .then(query => this.search(query));
@@ -70,7 +73,7 @@ export default class SearchForm extends React.Component {
           .then(query => this.search(query));
         break;
       default:
-        throw new Error(`invalid search form type: ${this.props.type}`);
+        throw new Error(`invalid ticket type: ${this.props.ticketType}`);
     }
   };
   search = (query) => {
@@ -79,16 +82,16 @@ export default class SearchForm extends React.Component {
       .catch(err => console.error(err.stack));
   };
   hasReturnFlight = () => {
-    return this.props.type === ticketTypes.RETURN;
+    return this.props.ticketType === ticketTypes.RETURN;
   };
   buildQueryOneWay = () => {
-    let query = {
-      type: ticketTypes.ONEWAY,
-      from: this.state.from,
-      destination: this.state.destination,
-      departureDate: this.state.departureDate,
-      passengers: this.state.passengers
-    };
+    let query = new SearchQueryOneWay(
+      currencyTypes.GBP,
+      this.state.from,
+      this.state.destination,
+      this.state.departureDate,
+      this.state.passengers
+    );
 
     if (!query.from) { return Promise.reject(new Error('invalid input from')); }
     if (!query.destination) { return Promise.reject(new Error('invalid input destination')); }
@@ -98,14 +101,14 @@ export default class SearchForm extends React.Component {
     return Promise.resolve(query);
   };
   buildQueryReturn = () => {
-    let query = {
-      type: ticketTypes.RETURN,
-      from: this.state.from,
-      destination: this.state.destination,
-      departureDate: this.state.departureDate,
-      returnDate: this.state.returnDate,
-      passengers: this.state.passengers
-    };
+    let query = new SearchQueryReturn(
+      currencyTypes.GBP,
+      this.state.from,
+      this.state.destination,
+      this.state.departureDate,
+      this.state.returnDate,
+      this.state.passengers
+    );
 
     if (!query.from) { return Promise.reject(new Error('invalid input from')); }
     if (!query.destination) { return Promise.reject(new Error('invalid input destination')); }

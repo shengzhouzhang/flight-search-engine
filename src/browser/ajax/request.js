@@ -3,12 +3,12 @@ import _ from 'lodash';
 import Promise from 'bluebird';
 import superagent from 'superagent';
 
-export function GET (uri, query) {
+export function POST (uri, query) {
   return new Promise((resolve, reject) => {
     superagent
-      .get(uri)
+      .post(uri)
+      .send(query)
       .set('Accept', 'application/json')
-      .query(query)
       .end((err, res) => {
         if (err) { return reject(new Error(`request error: error=${err.message}`)); }
         if (res && (res.statusCode < 200 || res.statusCode >= 300 )) {

@@ -9,8 +9,8 @@ export default class Container extends React.Component {
     result: resultStore.getState()
   };
   render = () => {
-    let query = this.state.result && this.state.result.query || null;
-    let items = this.state.result && this.state.result.items || null;
+    let query = this.state.result && this.state.result.searchQuery || null;
+    let items = this.state.result && this.state.result.tickets || null;
     return (
       <div className="search-results">
         { query ? (<Header query={query} />) : (undefined) }

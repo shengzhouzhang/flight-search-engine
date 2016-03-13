@@ -6,7 +6,7 @@ import ticketTypes from '../../config/ticketTypes';
 
 export default class Container extends React.Component {
   state = {
-    type: ticketTypes.RETURN
+    ticketType: ticketTypes.RETURN
   };
   render = () => {
     return (
@@ -16,21 +16,21 @@ export default class Container extends React.Component {
           <TabButton name="return" selected={this.isReturnSelected()} onSelect={this.selectReturn} />
         </div>
         <div className="form-body">
-          <SearchForm type={this.state.type} />
+          <SearchForm ticketType={this.state.ticketType} />
         </div>
       </div>
     );
   };
   isOneWaySelected = () => {
-    return this.state.type === ticketTypes.ONEWAY;
+    return this.state.ticketType === ticketTypes.ONEWAY;
   };
   isReturnSelected = () => {
-    return this.state.type === ticketTypes.RETURN;
+    return this.state.ticketType === ticketTypes.RETURN;
   };
   selectOneWay = () => {
-    this.setState({ type: ticketTypes.ONEWAY });
+    this.setState({ ticketType: ticketTypes.ONEWAY });
   };
   selectReturn = () => {
-    this.setState({ type: ticketTypes.RETURN });
+    this.setState({ ticketType: ticketTypes.RETURN });
   };
 }
