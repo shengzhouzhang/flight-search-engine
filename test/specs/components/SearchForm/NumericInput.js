@@ -45,7 +45,8 @@ describe('NumericInput Component', () => {
       let wrapper = shallow(<NumericInput {...PROPS} />);
       wrapper.instance().onChangeHandler({ target: { value: TEST_NUMBER }});
       expect(PROPS.onChange.called).to.eql(true);
-      expect(PROPS.onChange.getCall(0).args[0]).to.eql({ 'field-name': TEST_NUMBER });
+      expect(PROPS.onChange.getCall(0).args[0]).to.eql(PROPS.fieldName);
+      expect(PROPS.onChange.getCall(0).args[1]).to.eql(TEST_NUMBER);
     });
   });
 });
