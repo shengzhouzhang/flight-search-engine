@@ -1,5 +1,7 @@
 
+import _ from 'lodash';
 import React from 'react';
+import Promise from 'bluebird';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
@@ -17,15 +19,15 @@ describe('PriceSlider Component', () => {
   describe('initial state', () => {
 
     it('should have the min, max, values, symbol, hidden state', () => {
-      const DEFAULT_STATE = {
+      const STATE = {
         min: 0,
         max: 10,
-        hidden: false,
+        hidden: true,
         values: [ 0, 10 ],
         symbol: ''
       };
       let wrapper = shallow(<PriceSlider />);
-      expect(wrapper.instance().state()).to.eql(TEST_STATE);
+      expect(wrapper.instance().state).to.eql(STATE);
     });
   });
 
@@ -46,7 +48,7 @@ describe('PriceSlider Component', () => {
       };
       let wrapper = shallow(<PriceSlider />);
       expect(wrapper.contains(<label className="min-price">{ `${DEFAULT_STATE.symbol}${DEFAULT_STATE.min}` }</label>)).to.eql(true);
-      expect(wrapper.contains(<label className="min-price">{ `${DEFAULT_STATE.symbol}${DEFAULT_STATE.max}` }</label>)).to.eql(true);
+      expect(wrapper.contains(<label className="max-price">{ `${DEFAULT_STATE.symbol}${DEFAULT_STATE.max}` }</label>)).to.eql(true);
     });
 
     it('should render react slider', () => {
@@ -58,10 +60,10 @@ describe('PriceSlider Component', () => {
         symbol: ''
       };
       let wrapper = shallow(<PriceSlider />);
-      expect(wrapper.find(ReactSlider)).to.eql(true);
+      expect(wrapper.find(ReactSlider)).to.have.length(1);
       expect(wrapper.find(ReactSlider).prop('min')).to.eql(DEFAULT_STATE.min);
       expect(wrapper.find(ReactSlider).prop('max')).to.eql(DEFAULT_STATE.max);
-      expect(wrapper.find(ReactSlider).prop('values')).to.eql(DEFAULT_STATE.values);
+      expect(wrapper.find(ReactSlider).prop('value')).to.eql(DEFAULT_STATE.values);
       expect(wrapper.find(ReactSlider).prop('onChange')).to.eql(wrapper.instance().onChangeHandler);
       expect(wrapper.find(ReactSlider).contains(<div className="custom-handle">{ DEFAULT_STATE.values[0] }</div>)).to.eql(true);
       expect(wrapper.find(ReactSlider).contains(<div className="custom-handle">{ DEFAULT_STATE.values[1] }</div>)).to.eql(true);
@@ -95,7 +97,8 @@ describe('PriceSlider Component', () => {
       let wrapper = shallow(<PriceSlider />);
       wrapper.instance().onResultStoreChange = sinon.spy();
       wrapper.instance().subscribeResultStore();
-      resultStore.dispatch({ type: 'UPDATE', TEST_RESULT });
+      resultStore.dispatch({ type: 'UPDATE', result: TEST_RESULT });
+
       expect(wrapper.instance().unsubscribeResultStore).to.not.eql(undefined);
       expect(wrapper.instance().onResultStoreChange.called).to.eql(true);
       expect(wrapper.instance().onResultStoreChange.getCall(0).args[0]).to.eql(TEST_RESULT);
@@ -143,7 +146,7 @@ describe('PriceSlider Component', () => {
       let onFilterStoreChange = sinon.spy();
       let unsubscribe = filterStore.subscribe(() => {
         let filter = filterStore.getState();
-        onFilterStoreChange();
+        onFilterStoreChange(filter);
       });
       let result = wrapper.instance().onChangeHandler(TEST_VALUES);
       expect(wrapper.instance().setState.called).to.eql(true);

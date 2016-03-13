@@ -1,4 +1,5 @@
 
+import _ from 'lodash';
 import React from 'react';
 import ReactSlider from 'react-slider';
 import resultStore from '../../browser/stores/results';
@@ -43,7 +44,7 @@ export default class PriceSlider extends React.Component {
     });
   };
   onResultStoreChange = (result = {}) => {
-    let adjustedMaxValue = getAdjustedMaxValue(result.tickets);
+    let adjustedMaxValue = this.getAdjustedMaxValue(result.tickets);
     let symbol = result.searchQuery.currency.symbol;
     return this.setState({
       hidden: !result.tickets || result.tickets.length === 0,

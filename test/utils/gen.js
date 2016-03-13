@@ -13,8 +13,8 @@ import { SearchQueryOneWay, SearchQueryReturn } from '../../src/domains/SearchQu
 import SearchResults from '../../src/domains/SearchResults';
 
 export function genSearchResults (ticketType, size) {
-  let SearchQuery = genSearchQuery(ticketType);
-  return new SearchResults(SearchQuery, genOneWayTickets(searchQuery, size))
+  let searchQuery = genSearchQuery(ticketType);
+  return new SearchResults(searchQuery, genOneWayTickets(searchQuery, size))
 }
 
 export function genSearchQuery (ticketType) {
@@ -66,7 +66,7 @@ export function genTicket (key, ticketType) {
 
 export function genOneWayTickets (searchQuery, size) {
   return _.range(size)
-    .map((index) => genOneWayTicket(key, searchQuery));
+    .map((index) => genOneWayTicket(index, searchQuery));
 }
 
 export function genOneWayTicket (key, searchQuery) {
