@@ -7,7 +7,6 @@ import bodyParser from 'body-parser';
 import expressHandlebars from 'express-handlebars';
 import FlightSearchApp from '../server/controllers/apps/FlightSearchApp';
 import FlightSearchApi from '../server/controllers/apis/FlightSearchApi';
-import config from '../config/server';
 import routes from '../config/routes';
 
 var webpack = require('webpack');
@@ -35,7 +34,4 @@ server.use('/assets/', express.static(path.join(__dirname, '..', '..', 'dist', '
 server.use(routes.API_PREFIX, new FlightSearchApi().defaultRouter);
 server.use(routes.APP_PREFIX, new FlightSearchApp().defaultRouter);
 
-server.listen(config.PORT, function (err) {
-  if (err) { return console.error(err); }
-  console.info('Server on %s', config.PORT);
-});
+export default server;
