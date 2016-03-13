@@ -58,6 +58,8 @@ $from-line-height: 25px;
     input {
       border: 1px solid $border-color;
       padding: 0 3px;
+      @include border-radius(0);
+      box-shadow: none;
     }
 
     label,
@@ -72,7 +74,7 @@ $from-line-height: 25px;
     .form-item {
       margin-bottom: 15px;
 
-      &.error > input {
+      &.error input {
         background-color: yellow;
       }
     }

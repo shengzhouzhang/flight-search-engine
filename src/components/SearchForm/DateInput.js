@@ -1,5 +1,7 @@
 
+import moment from 'moment';
 import React from 'react';
+import DatePicker from 'react-datepicker';
 
 export default class DateInput extends React.Component {
   static propTypes = {
@@ -12,13 +14,13 @@ export default class DateInput extends React.Component {
   render = () => {
     return (
       <div className={`date-input form-item ${this.props.fieldName} ${this.props.hasError ? 'error' : ''}`}>
-        <label htmlFor={this.props.fieldName}>{ `${this.props.displayName} *` }</label>
-        <input type="date" name={this.props.fieldName} value={this.props.value}
-          onChange={this.onChangeHandler} required />
+        <label>{ `${this.props.displayName} *` }</label>
+        <DatePicker selected={moment(this.props.value, 'YYYY-MM-DD')}
+          onChange={this.onChangeHandler} dateFormat="DD/MM/YYYY" />
       </div>
     );
   };
-  onChangeHandler = (event) => {
-    this.props.onChange(this.props.fieldName, event.target.value);
+  onChangeHandler = (date) => {
+    this.props.onChange(this.props.fieldName, date.format('YYYY-MM-DD'));
   };
 }

@@ -12,7 +12,7 @@ describe('Logo Component', () => {
     it('should show logo image', () => {
       const TEST_IMAGE_URI = 'TEST_IMAGE_URI';
       let wrapper = shallow(<Logo imageUri={TEST_IMAGE_URI} />);
-      expect(wrapper.contains(<img src={TEST_IMAGE_URI}/>)).to.eql(true);
+      expect(wrapper.contains(<img alt="airline" src={TEST_IMAGE_URI}/>)).to.eql(true);
     });
 
     it('should have the airline-logo class', () => {

@@ -1,4 +1,6 @@
 
+@import '../../../libs/react-datepicker.scss';
+
 $border-color: #ddd;
 $font-color: #333;
 $background-color-default: #fcfcfc;
@@ -13,6 +15,7 @@ $button-color-light: #f1f1f1;
   margin: 0;
   padding: 0;
   outline: none;
+  box-shadow: none;
   border: none;
   box-shadow: none;
   background-color: transparent;
@@ -24,11 +27,6 @@ $button-color-light: #f1f1f1;
 body {
   background: $background-color-default;
 }
-
-.app-container {
-}
-
-
 
 @import './header.scss';
 @import './sidebar.scss';

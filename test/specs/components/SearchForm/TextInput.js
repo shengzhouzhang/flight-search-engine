@@ -17,7 +17,7 @@ describe('TextInput Component', () => {
         onChange: sinon.spy()
       };
       let wrapper = shallow(<TextInput {...PROPS} />);
-      expect(wrapper.find('label').text()).to.eql(PROPS.displayName);
+      expect(wrapper.find('label').text()).to.eql(`${PROPS.displayName} *`);
       expect(wrapper.find('input').prop('type')).to.eql('text');
       expect(wrapper.find('input').prop('onChange')).to.eql(wrapper.instance().onChangeHandler);
     });

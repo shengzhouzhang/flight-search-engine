@@ -17,7 +17,7 @@ describe('NumericInput Component', () => {
         onChange: sinon.spy()
       };
       let wrapper = shallow(<NumericInput {...PROPS} />);
-      expect(wrapper.find('label').text()).to.eql(PROPS.displayName);
+      expect(wrapper.find('label').text()).to.eql(`${PROPS.displayName} *`);
       expect(wrapper.find('input').prop('type')).to.eql('number');
       expect(wrapper.find('input').prop('onChange')).to.eql(wrapper.instance().onChangeHandler);
     });

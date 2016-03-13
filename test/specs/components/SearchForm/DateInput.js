@@ -1,9 +1,11 @@
 
+import moment from 'moment';
 import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
+import DatePicker from 'react-datepicker';
 import DateInput from '../../../../src/components/SearchForm/DateInput';
 
 describe('DateInput Component', () => {
@@ -17,9 +19,9 @@ describe('DateInput Component', () => {
         onChange: sinon.spy()
       };
       let wrapper = shallow(<DateInput {...PROPS} />);
-      expect(wrapper.find('label').text()).to.eql(PROPS.displayName);
-      expect(wrapper.find('input').prop('type')).to.eql('date');
-      expect(wrapper.find('input').prop('onChange')).to.eql(wrapper.instance().onChangeHandler);
+      expect(wrapper.find('label').text()).to.eql(`${PROPS.displayName} *`);
+      expect(wrapper.find(DatePicker).prop('selected')).to.eql(moment(wrapper.instance().props.value, 'YYYY-MM-DD'));
+      expect(wrapper.find(DatePicker).prop('onChange')).to.eql(wrapper.instance().onChangeHandler);
     });
 
     it('should have the date-input class', () => {
@@ -43,7 +45,7 @@ describe('DateInput Component', () => {
       };
       const TEST_DATE = '2016-03-12';
       let wrapper = shallow(<DateInput {...PROPS} />);
-      wrapper.instance().onChangeHandler({ target: { value: TEST_DATE }});
+      wrapper.instance().onChangeHandler(moment(TEST_DATE, 'YYYY-MM-DD'));
       expect(PROPS.onChange.called).to.eql(true);
       expect(PROPS.onChange.getCall(0).args[0]).to.eql(PROPS.fieldName);
       expect(PROPS.onChange.getCall(0).args[1]).to.eql(TEST_DATE);
