@@ -13,7 +13,7 @@ export default class FlightSearchApp {
   };
 
   app = (req, res) => {
-    let props = {};
+    let props = { ticketRepository: {} };
     return res.render('index', {
       html: ReactDOMServer.renderToString(<FlightSearchAppComponent {...props} />),
       data: JSON.stringify(props)

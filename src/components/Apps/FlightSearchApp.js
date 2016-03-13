@@ -91,9 +91,7 @@ export default class FlightSearchApp extends React.Component {
         filterStore.dispatch({ type: 'RESET' })
         resultStore.dispatch({ type: 'UPDATE', result: result })
       })
-      .catch(err => {
-        console.error(err.stack)
-      });
+      .catch(err => alert(err.message));
   };
   onFilterHandler = (filter) => {
     filterStore.dispatch({ type: 'UPDATE', filter: filter });

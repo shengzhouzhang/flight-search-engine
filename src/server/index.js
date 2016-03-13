@@ -9,17 +9,7 @@ import FlightSearchApp from '../server/controllers/apps/FlightSearchApp';
 import FlightSearchApi from '../server/controllers/apis/FlightSearchApi';
 import routes from '../config/routes';
 
-var webpack = require('webpack');
-var webpackConfig = require('../../webpack.config');
-var compiler = webpack(webpackConfig);
-
 let server = express();
-
-server.use(require("webpack-dev-middleware")(compiler, {
-  publicPath: webpackConfig.output.publicPath
-}));
-
-server.use(require("webpack-hot-middleware")(compiler));
 
 server.use(compression());
 server.use(bodyParser.json());
