@@ -45,7 +45,8 @@ describe('TextInput Component', () => {
       let wrapper = shallow(<TextInput {...TEST_PROPS} />);
       wrapper.instance().onChangeHandler({ target: { value: TEST_TEXT }});
       expect(TEST_PROPS.onChange.called).to.eql(true);
-      expect(TEST_PROPS.onChange.getCall(0).args[0]).to.eql({ 'field-name': TEST_TEXT });
+      expect(TEST_PROPS.onChange.getCall(0).args[0]).to.eql(TEST_PROPS.fieldName);
+      expect(TEST_PROPS.onChange.getCall(0).args[1]).to.eql(TEST_TEXT);
     });
   });
 });
