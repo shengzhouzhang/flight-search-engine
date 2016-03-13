@@ -7,7 +7,7 @@ $price-slider-line-height: 25px;
   border: 1px solid $border-color;
   padding: 10px;
   background: $background-color-light;
-  
+
   &.hidden {
     display: none;
   }
@@ -35,6 +35,7 @@ $price-slider-line-height: 25px;
       min-width: $price-slider-line-height;
       height: $price-slider-line-height;
       line-height: $price-slider-line-height;
+      padding: 0 2px;
       text-align: center;
       background-color: #fff;
       border: 1px solid $border-color;
