@@ -8,11 +8,6 @@ import { expect } from 'chai';
 
 import ReactSlider from 'react-slider';
 import PriceSlider from '../../../../src/components/PriceSlider';
-import resultStore from '../../../../src/browser/stores/results';
-import filterStore from '../../../../src/browser/stores/filter';
-
-import ticketTypes from '../../../../src/config/ticketTypes';
-import { genSearchResults } from '../../../utils/gen';
 
 describe('PriceSlider Component', () => {
 

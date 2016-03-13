@@ -12,8 +12,12 @@ import ticketTypes from '../../../../src/config/ticketTypes';
 describe('Search Form Container Component', () => {
 
   describe('initial state', () => {
-    let wrapper = shallow(<Container />);
-    expect(wrapper.state('ticketType')).to.eql(ticketTypes.RETURN);
+
+    it('should have ticketTypes.RETURN', () => {
+      
+      let wrapper = shallow(<Container />);
+      expect(wrapper.state('ticketType')).to.eql(ticketTypes.RETURN);
+    });
   });
 
   describe('render function', () => {
