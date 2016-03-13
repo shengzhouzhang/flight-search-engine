@@ -80,7 +80,7 @@ export function genOneWayTicket (key, searchQuery) {
       searchQuery.destination,
       moment(searchQuery.departureDate, 'YYYY-MM-DD').hour(10).minute(0).startOf('minute').valueOf()
     ),
-    new Price(searchQuery.currency, _.random(50, 200) * searchQuery.passengers)
+    genPrice(searchQuery.currency, searchQuery.passengers)
   );
 }
 
@@ -109,6 +109,14 @@ export function genReturnTicket (key, searchQuery) {
       moment(searchQuery.returnDate, 'YYYY-MM-DD').hour(10).minute(0).startOf('minute').valueOf(),
       moment(searchQuery.returnDate, 'YYYY-MM-DD').hour(12).minute(0).startOf('minute').valueOf()
     ),
-    new Price(searchQuery.currency, _.random(50, 200) * searchQuery.passengers)
+    genPrice(searchQuery.currency, searchQuery.passengers)
   );
+}
+
+export function genPrice (currency, passengers) {
+  return new Price(currency, _.random(50, 200) * passengers);
+}
+
+export function randomPrice () {
+  return new Price(Currency.fromJson(CurrencyTypes.GBP), _.random(50, 200) * _.random(1, 10));
 }

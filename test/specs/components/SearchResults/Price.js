@@ -4,18 +4,22 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import Price from '../../../../src/components/SearchResults/Price';
+import { randomPrice } from '../../../utils/gen';
 
 describe('Price Component', () => {
 
-  it('should show the price and symbol', () => {
-    const TEST_PRICE = { value: 125, symbol: '£' };
-    let wrapper = shallow(<Price {...TEST_PRICE} />);
-    expect(wrapper.text()).to.eql(`${TEST_PRICE.symbol} ${TEST_PRICE.value}`);
-  });
+  describe('render function', () => {
 
-  it('should have the price class', () => {
-    const TEST_PRICE = { value: 125, symbol: '£' };
-    let wrapper = shallow(<Price {...TEST_PRICE} />);
-    expect(wrapper.hasClass('price')).to.eql(true);
+    it('should show the price and symbol', () => {
+      const PROPS = randomPrice();
+      let wrapper = shallow(<Price {...PROPS} />);
+      expect(wrapper.text()).to.eql(`${PROPS.currency.symbol}${PROPS.value}.00`);
+    });
+
+    it('should have the price class', () => {
+      const PROPS = randomPrice();
+      let wrapper = shallow(<Price {...PROPS} />);
+      expect(wrapper.hasClass('price')).to.eql(true);
+    });
   });
 });
