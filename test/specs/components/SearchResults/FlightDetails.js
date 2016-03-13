@@ -29,8 +29,8 @@ describe('FlightDetails Component', () => {
       expect(wrapper.find(FlightNumber).prop('value')).to.eql(PROPS.number);
       expect(wrapper.find(From).prop('value')).to.eql(PROPS.from);
       expect(wrapper.find(Destination).prop('value')).to.eql(PROPS.destination);
-      expect(wrapper.find(Departure).prop('value')).to.eql(`depart: ${moment(PROPS.departureTime).format('HH:mm A')}`);
-      expect(wrapper.find(Arrival).prop('value')).to.eql(`arrive: ${moment(PROPS.arrivalTime).format('HH:mm A')}`);
+      expect(wrapper.find(Departure).prop('value')).to.eql(PROPS.departureTime);
+      expect(wrapper.find(Arrival).prop('value')).to.eql(PROPS.arrivalTime);
     });
 
     it('should have the flight-details class', () => {
@@ -84,7 +84,7 @@ describe('FlightDetails Component', () => {
       it('should show flight destination', () => {
         const PROPS = { value: randomFlight('0').destination };
         let wrapper = shallow(<Destination {...PROPS} />);
-        expect(wrapper.text()).to.eql(PROPS.destination);
+        expect(wrapper.text()).to.eql(PROPS.value);
       });
 
       it('should have the flight-destination class', () => {
@@ -102,7 +102,7 @@ describe('FlightDetails Component', () => {
       it('should show formated flight departure time', () => {
         const PROPS = { value: randomFlight('0').departureTime };
         let wrapper = shallow(<Departure {...PROPS} />);
-        expect(wrapper.text()).to.eql(moment(PROPS.departureTime).format('HH:mm A'));
+        expect(wrapper.text()).to.eql(`depart: ${moment(PROPS.value).format('HH:mm A')}`);
       });
 
       it('should have the flight-departure class', () => {
@@ -117,10 +117,10 @@ describe('FlightDetails Component', () => {
 
     describe('render function', () => {
 
-      it('should show formated flight arrival time', () => {
+      it('should render formated flight arrival time', () => {
         const PROPS = { value: randomFlight('0').arrivalTime };
         let wrapper = shallow(<Arrival {...PROPS} />);
-        expect(wrapper.text()).to.eql(moment(PROPS.departureTime).format('HH:mm A'));
+        expect(wrapper.text()).to.eql(`arrive: ${moment(PROPS.value).format('HH:mm A')}`);
       });
 
       it('should have the flight-arrival class', () => {
