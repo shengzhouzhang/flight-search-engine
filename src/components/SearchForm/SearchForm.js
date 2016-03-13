@@ -69,9 +69,16 @@ export class SearchFormOneWay extends React.Component {
   isValid = (fields) => {
     let hasError = false;
     if (!fields.from) { this.state.errors.from = true; hasError = true; }
-    if (!fields.destination) { this.state.errors.destination = true; hasError = true; }
+    if (!fields.destination ||
+        (fields.from && fields.destination && fields.from === fields.destination)) {
+      this.state.errors.destination = true;
+      hasError = true;
+    }
     if (!fields.departureDate) { this.state.errors.departureDate = true; hasError = true; }
-    if (!fields.passengers) { this.state.errors.passengers = true; hasError = true; }
+    if (!fields.passengers || fields.passengers <= 0) {
+      this.state.errors.passengers = true;
+      hasError = true;
+    }
     if (hasError) { this.forceUpdate(); }
     return !hasError;
   };
@@ -141,10 +148,22 @@ export class SearchFormReturn extends React.Component {
   isValid = (fields) => {
     let hasError = false;
     if (!fields.from) { this.state.errors.from = true; hasError = true; }
-    if (!fields.destination) { this.state.errors.destination = true; hasError = true; }
+    if (!fields.destination ||
+        (fields.from && fields.destination && fields.from === fields.destination)) {
+      this.state.errors.destination = true;
+      hasError = true;
+    }
     if (!fields.departureDate) { this.state.errors.departureDate = true; hasError = true; }
-    if (!fields.returnDate) { this.state.errors.returnDate = true; hasError = true; }
-    if (!fields.passengers || fields.passengers <= 0) { this.state.errors.passengers = true; hasError = true; }
+    if (!fields.returnDate ||
+        (fields.departureDate && fields.returnDate &&
+         moment(fields.departureDate, 'YYYY-MM-DD').valueOf() > moment(fields.returnDate, 'YYYY-MM-DD').valueOf())) {
+           this.state.errors.returnDate = true;
+           hasError = true;
+    }
+    if (!fields.passengers || fields.passengers <= 0) {
+      this.state.errors.passengers = true;
+      hasError = true;
+    }
     if (hasError) { this.forceUpdate(); }
     return !hasError;
   };
