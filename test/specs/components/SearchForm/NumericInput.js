@@ -11,24 +11,24 @@ describe('NumericInput Component', () => {
   describe('render function', () => {
 
     it('should show label and input', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         fieldName: 'field-name',
         displayName: 'display-name',
         onChange: sinon.spy()
       };
-      let wrapper = shallow(<NumericInput {...TEST_PROPS} />);
-      expect(wrapper.find('label').text()).to.eql(TEST_PROPS.displayName);
+      let wrapper = shallow(<NumericInput {...PROPS} />);
+      expect(wrapper.find('label').text()).to.eql(PROPS.displayName);
       expect(wrapper.find('input').prop('type')).to.eql('number');
       expect(wrapper.find('input').prop('onChange')).to.eql(wrapper.instance().onChangeHandler);
     });
 
     it('should have the numeric-input class', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         fieldName: 'field-name',
         displayName: 'display-name',
         onChange: sinon.spy()
       };
-      let wrapper = shallow(<NumericInput {...TEST_PROPS} />);
+      let wrapper = shallow(<NumericInput {...PROPS} />);
       expect(wrapper.hasClass('numeric-input')).to.eql(true);
     });
   });
@@ -36,16 +36,16 @@ describe('NumericInput Component', () => {
   describe('onChangeHandler function', () => {
 
     it('should trigger onChange handler', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         fieldName: 'field-name',
         displayName: 'display-name',
         onChange: sinon.spy()
       };
       const TEST_NUMBER = 1;
-      let wrapper = shallow(<NumericInput {...TEST_PROPS} />);
+      let wrapper = shallow(<NumericInput {...PROPS} />);
       wrapper.instance().onChangeHandler({ target: { value: TEST_NUMBER }});
-      expect(TEST_PROPS.onChange.called).to.eql(true);
-      expect(TEST_PROPS.onChange.getCall(0).args[0]).to.eql({ 'field-name': TEST_NUMBER });
+      expect(PROPS.onChange.called).to.eql(true);
+      expect(PROPS.onChange.getCall(0).args[0]).to.eql({ 'field-name': TEST_NUMBER });
     });
   });
 });

@@ -19,10 +19,10 @@ describe('SearchForm Component', () => {
   describe('render function', () => {
 
     it('should show from, destination, departure date, passengers, and submit button', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.ONEWAY
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       expect(wrapper.contains(
         <TextInput fieldName="from" displayName="from" value={wrapper.instance().state.from}
           onChange={wrapper.instance().onChangeHandler} />
@@ -45,10 +45,10 @@ describe('SearchForm Component', () => {
     });
 
     it('should show from, destination, departure date, return date, passengers, and submit button', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.RETURN
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       expect(wrapper.contains(
         <TextInput fieldName="from" displayName="from" value={wrapper.instance().state.from}
           onChange={wrapper.instance().onChangeHandler} />
@@ -75,10 +75,10 @@ describe('SearchForm Component', () => {
     });
 
     it('should have the search-form class', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.ONEWAY
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       expect(wrapper.hasClass('search-form')).to.eql(true);
     });
   });
@@ -86,10 +86,10 @@ describe('SearchForm Component', () => {
   describe('onChangeHandler function', () => {
 
     it('should update state - oneway', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.ONEWAY
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       expect(wrapper.instance().state.from).to.eql('');
       expect(wrapper.instance().state.destination).to.eql('');
       expect(wrapper.instance().state.departureDate).to.eql(moment().format('YYYY-MM-DD'));
@@ -107,10 +107,10 @@ describe('SearchForm Component', () => {
     });
 
     it('should update state - return', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.RETURN
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       expect(wrapper.instance().state.from).to.eql('');
       expect(wrapper.instance().state.destination).to.eql('');
       expect(wrapper.instance().state.departureDate).to.eql(moment().format('YYYY-MM-DD'));
@@ -134,20 +134,20 @@ describe('SearchForm Component', () => {
   describe('onSubmitHandler funciton', () => {
 
     it('should call buildQueryOneWay function', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.ONEWAY
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       wrapper.instance().buildQueryOneWay = sinon.stub().returns(Promise.resolve());
       wrapper.instance().onSubmitHandler();
       expect(wrapper.instance().buildQueryOneWay.called).to.eql(true);
     });
 
     it('should call buildQueryReturn function', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.RETURN
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       wrapper.instance().buildQueryReturn = sinon.stub().returns(Promise.resolve());
       wrapper.instance().onSubmitHandler();
       expect(wrapper.instance().buildQueryReturn.called).to.eql(true);
@@ -157,10 +157,10 @@ describe('SearchForm Component', () => {
   describe('buildQueryOneWay funciton', () => {
 
     it('should return query for search flights', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.ONEWAY
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       wrapper.instance().onChangeHandler({ from: 'PNQ' });
       wrapper.instance().onChangeHandler({ destination: 'DEL' });
       wrapper.instance().onChangeHandler({ departureDate: '2016-03-12' });
@@ -182,10 +182,10 @@ describe('SearchForm Component', () => {
   describe('buildQueryReturn funciton', () => {
 
     it('should return query for search flights', () => {
-      const TEST_PROPS = {
+      const PROPS = {
         ticketType: ticketTypes.RETURN
       };
-      let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
+      let wrapper = shallow(<SearchForm {...PROPS} />);
       wrapper.instance().onChangeHandler({ from: 'PNQ' });
       wrapper.instance().onChangeHandler({ destination: 'DEL' });
       wrapper.instance().onChangeHandler({ departureDate: '2016-03-12' });
