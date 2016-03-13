@@ -12,7 +12,7 @@ import currencyTypes from '../../config/currencyTypes';
 
 import resultStore from '../../browser/stores/results';
 import { SearchQueryOneWay, SearchQueryReturn } from '../../domains/SearchQuery' ;
-
+import Currency from '../../domains/Currency' ;
 import { search } from '../../browser/ajax/search';
 
 export default class SearchForm extends React.Component {
@@ -86,7 +86,7 @@ export default class SearchForm extends React.Component {
   };
   buildQueryOneWay = () => {
     let query = new SearchQueryOneWay(
-      currencyTypes.GBP,
+      new Currency(...currencyTypes.GBP),
       this.state.from,
       this.state.destination,
       this.state.departureDate,
@@ -102,7 +102,7 @@ export default class SearchForm extends React.Component {
   };
   buildQueryReturn = () => {
     let query = new SearchQueryReturn(
-      currencyTypes.GBP,
+      new Currency(...currencyTypes.GBP),
       this.state.from,
       this.state.destination,
       this.state.departureDate,

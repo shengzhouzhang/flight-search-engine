@@ -43,17 +43,20 @@ export default class PriceSlider extends React.Component {
     });
   };
   onResultStoreChange = (result = {}) => {
-    let maxPriceTicket = _.maxBy(result.tickets, ticket => ticket.price.value);
-    let maxPrice = maxPriceTicket && maxPriceTicket.price || undefined;
-    let maxValue = maxPrice && maxPrice.value || 0;
-    let adjustedMaxValue = Math.ceil(maxValue / 100) * 100;
-    let symbol = maxPrice && maxPrice.currency.symbol || '';
+    let adjustedMaxValue = getAdjustedMaxValue(result.tickets);
+    let symbol = result.searchQuery.currency.symbol;
     return this.setState({
       hidden: !result.tickets || result.tickets.length === 0,
       max: adjustedMaxValue,
       symbol: symbol,
       values: [ 0, adjustedMaxValue ]
     });
+  };
+  getAdjustedMaxValue = (tickets) => {
+    let maxPriceTicket = _.maxBy(tickets, ticket => ticket.price.value);
+    let maxPrice = maxPriceTicket && maxPriceTicket.price || undefined;
+    let maxValue = maxPrice && maxPrice.value || 0;
+    return maxValue && Math.ceil(maxValue / 100) * 100 || 0;
   };
   onChangeHandler = (values) => {
     this.setState({ values: values });

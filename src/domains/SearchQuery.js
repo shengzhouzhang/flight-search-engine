@@ -27,7 +27,7 @@ export class SearchQueryOneWay {
   };
   constructor (currency, from, destination, departureDate, passengers) {
     this.ticketType = ticketTypes.ONEWAY;
-    this.currency = Currency.fromJson(currency);
+    this.currency = currency;
     this.from = from;
     this.destination = destination;
     this.departureDate = departureDate;
@@ -48,7 +48,7 @@ export class SearchQueryReturn {
   };
   constructor (currency, from, destination, departureDate, returnDate, passengers) {
     this.ticketType = ticketTypes.RETURN;
-    this.currency = Currency.fromJson(currency);
+    this.currency = currency;
     this.from = from;
     this.destination = destination;
     this.departureDate = departureDate;
