@@ -5,6 +5,9 @@ import SearchForm from '../../components/SearchForm/SearchForm';
 import ticketTypes from '../../config/ticketTypes';
 
 export default class Container extends React.Component {
+  static propTypes = {
+    onSearch: React.PropTypes.func.isRequired
+  }
   state = {
     ticketType: ticketTypes.RETURN
   };
@@ -16,7 +19,7 @@ export default class Container extends React.Component {
           <TabButton name="return" selected={this.isReturnSelected()} onSelect={this.selectReturn} />
         </div>
         <div className="form-body">
-          <SearchForm ticketType={this.state.ticketType} />
+          <SearchForm ticketType={this.state.ticketType} onSearch={this.props.onSearch} />
         </div>
       </div>
     );

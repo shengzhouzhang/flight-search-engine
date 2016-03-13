@@ -1,7 +1,7 @@
 
 const ROUTES = {
-  APP_BASE_URI: '/',
-  API_BASE_URI: '/api',
+  APP_PREFIX: '/',
+  API_PREFIX: '/api',
   SEARCH_TICKETS: '/tickets/search'
 };
 

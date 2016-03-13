@@ -32,8 +32,8 @@ server.set('views', path.join(__dirname, 'templates'));
 
 server.use('/assets/', express.static(path.join(__dirname, '..', '..', 'dist', 'assets')));
 
-server.use(routes.API_BASE_URI, new FlightSearchApi().defaultRouter);
-server.use(routes.APP_BASE_URI, new FlightSearchApp().defaultRouter);
+server.use(routes.API_PREFIX, new FlightSearchApi().defaultRouter);
+server.use(routes.APP_PREFIX, new FlightSearchApp().defaultRouter);
 
 server.listen(config.PORT, function (err) {
   if (err) { return console.error(err); }
