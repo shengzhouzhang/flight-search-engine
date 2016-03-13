@@ -13,7 +13,7 @@ describe('Container Component', () => {
 
   describe('initial state', () => {
     let wrapper = shallow(<Container />);
-    expect(wrapper.state('type')).to.eql(ticketTypes.RETURN);
+    expect(wrapper.state('ticketType')).to.eql(ticketTypes.RETURN);
   });
 
   describe('render function', () => {
@@ -26,19 +26,19 @@ describe('Container Component', () => {
       expect(wrapper.contains(
         <TabButton name="return" selected={true} onSelect={wrapper.instance().selectReturn} />
       )).to.eql(true);
-      expect(wrapper.contains(<SearchForm type={ticketTypes.RETURN} />)).to.eql(true);
+      expect(wrapper.contains(<SearchForm ticketType={ticketTypes.RETURN} />)).to.eql(true);
     });
 
     it('should show selected one way tab, unselected return tab, and one way search form', () => {
       let wrapper = shallow(<Container />);
-      wrapper.setState({ type: ticketTypes.ONEWAY });
+      wrapper.setState({ ticketType: ticketTypes.ONEWAY });
       expect(wrapper.contains(
         <TabButton name="one way" selected={true} onSelect={wrapper.instance().selectOneWay} />
       )).to.eql(true);
       expect(wrapper.contains(
         <TabButton name="return" selected={false} onSelect={wrapper.instance().selectReturn} />
       )).to.eql(true);
-      expect(wrapper.contains(<SearchForm type={ticketTypes.ONEWAY} />)).to.eql(true);
+      expect(wrapper.contains(<SearchForm ticketType={ticketTypes.ONEWAY} />)).to.eql(true);
     });
 
     it('should have the form-container, form-header, and form-body classes', () => {
@@ -51,15 +51,15 @@ describe('Container Component', () => {
 
   describe('isOneWaySelected function', () => {
 
-    it('should return true if type is one way', () => {
+    it('should return true if ticketType is one way', () => {
       let wrapper = shallow(<Container />);
-      wrapper.setState({ type: ticketTypes.ONEWAY });
+      wrapper.setState({ ticketType: ticketTypes.ONEWAY });
       expect(wrapper.instance().isOneWaySelected()).to.eql(true);
     });
 
-    it('should return false if type is return', () => {
+    it('should return false if ticketType is return', () => {
       let wrapper = shallow(<Container />);
-      wrapper.setState({ type: ticketTypes.RETURN });
+      wrapper.setState({ ticketType: ticketTypes.RETURN });
       expect(wrapper.instance().isOneWaySelected()).to.eql(false);
     });
   });
@@ -72,35 +72,35 @@ describe('Container Component', () => {
       expect(wrapper.instance().isReturnSelected()).to.eql(false);
     });
 
-    it('should return true if type is return', () => {
+    it('should return true if ticketType is return', () => {
       let wrapper = shallow(<Container />);
-      wrapper.setState({ type: ticketTypes.RETURN });
+      wrapper.setState({ ticketType: ticketTypes.RETURN });
       expect(wrapper.instance().isReturnSelected()).to.eql(true);
     });
   });
 
   describe('selectOneWay function', () => {
 
-    it('should update type to one way', () => {
+    it('should update ticketType to one way', () => {
       let wrapper = shallow(<Container />);
-      expect(wrapper.state('type')).to.eql(ticketTypes.RETURN);
+      expect(wrapper.state('ticketType')).to.eql(ticketTypes.RETURN);
       wrapper.instance().selectOneWay();
-      expect(wrapper.state('type')).to.eql(ticketTypes.ONEWAY);
+      expect(wrapper.state('ticketType')).to.eql(ticketTypes.ONEWAY);
       wrapper.instance().selectOneWay();
-      expect(wrapper.state('type')).to.eql(ticketTypes.ONEWAY);
+      expect(wrapper.state('ticketType')).to.eql(ticketTypes.ONEWAY);
     });
   });
 
   describe('selectReturn function', () => {
 
-    it('should update type to return', () => {
+    it('should update ticketType to return', () => {
       let wrapper = shallow(<Container />);
-      wrapper.setState({ type: ticketTypes.ONEWAY });
-      expect(wrapper.state('type')).to.eql(ticketTypes.ONEWAY);
+      wrapper.setState({ ticketType: ticketTypes.ONEWAY });
+      expect(wrapper.state('ticketType')).to.eql(ticketTypes.ONEWAY);
       wrapper.instance().selectReturn();
-      expect(wrapper.state('type')).to.eql(ticketTypes.RETURN);
+      expect(wrapper.state('ticketType')).to.eql(ticketTypes.RETURN);
       wrapper.instance().selectReturn();
-      expect(wrapper.state('type')).to.eql(ticketTypes.RETURN);
+      expect(wrapper.state('ticketType')).to.eql(ticketTypes.RETURN);
     });
   });
 });
