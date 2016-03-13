@@ -9,12 +9,13 @@ import { TicketOneWay, TicketReturn } from '../../../domains/Ticket';
 import SearchQuery from '../../../domains/SearchQuery';
 import SearchResults from '../../../domains/SearchResults';
 import ticketTypes from '../../../config/ticketTypes';
+import routes from '../../../config/routes';
 
 export default class FlightSearchApp {
   defaultRouter = express.Router();
 
   constructor() {
-    this.defaultRouter.post('/flight-tickets/search', this.search);
+    this.defaultRouter.post(routes.SEARCH_TICKETS, this.search);
   };
   search = (req, res) => {
     let searchQuery = SearchQuery.fromJson(req.body);
