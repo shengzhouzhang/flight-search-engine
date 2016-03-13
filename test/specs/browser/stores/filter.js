@@ -61,6 +61,12 @@ describe('Filter Store', () => {
       expect(state).to.eql(FILTER);
     });
 
+    it('should handle RESET action', () => {
+      const DEFAULT_STATE = { min: 0, max: undefined };
+      let state = reducer(null, { type: 'RESET' });
+      expect(state).to.eql(DEFAULT_STATE);
+    });
+
     it('should handle default action', () => {
       const FILTER = 'FILTER';
       let state = reducer(FILTER, { type: '', filter: null });

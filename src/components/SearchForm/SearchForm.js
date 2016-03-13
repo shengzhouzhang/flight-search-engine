@@ -9,7 +9,7 @@ import NumericInput from '../../components/SearchForm/NumericInput';
 import SubmitButton from '../../components/SearchForm/SubmitButton';
 import ticketTypes from '../../config/ticketTypes';
 import currencyTypes from '../../config/currencyTypes';
-
+import filterStore from '../../browser/stores/filter';
 import resultStore from '../../browser/stores/results';
 import { SearchQueryOneWay, SearchQueryReturn } from '../../domains/SearchQuery' ;
 import Currency from '../../domains/Currency' ;
@@ -78,7 +78,10 @@ export default class SearchForm extends React.Component {
   };
   search = (query) => {
     return search(query)
-      .then(result => resultStore.dispatch({ type: 'UPDATE', result: result }))
+      .then(result => {
+        filterStore.dispatch({ type: 'RESET' })
+        resultStore.dispatch({ type: 'UPDATE', result: result })
+      })
       .catch(err => console.error(err.stack));
   };
   hasReturnFlight = () => {
