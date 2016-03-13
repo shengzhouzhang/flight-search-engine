@@ -1,6 +1,5 @@
 
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -10,7 +9,7 @@ describe('PageHeader Component', () => {
 
   describe('render function', () => {
 
-    it('should show title', () => {
+    it('should render page title', () => {
       let wrapper = shallow(<PageHeader />);
       expect(wrapper.text()).to.eql('flight search engine');
     });
