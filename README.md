@@ -3,6 +3,15 @@
 - This program is the implementation of the flight search engine based on the exercise spec.
 - It includes a search results page, the unit tests, and the end-to-end automated tests.
 - The search results are generated based on the form inputs through requesting to the endpoint `/api/tickets/search`.
+- The search results page is under the path `/api/tickets/search`
+
+# Environment
+
+- The program is implemented in the following environments:
+
+- Node JS -- version 4.3.2
+- NPM -- version 2.14.12
+- MAC -- OS X EI Capitan -- version 10.11.3
 
 # Installation
 
@@ -21,7 +30,15 @@ $ npm test
 ```
 
 - Automated End-to-End tests are under folder `test/automation`.
-- To run the automated end-to-end tests, simply do
+- It needs a running server, it visits `http://localhost:8080/tickets/search` by default.
+- Please use a terminal to start a server. simply do,
+
+```
+$ gulp build
+$ node index.js
+```
+
+- Then, use another terminal run the following command,
 
 ```
 $ mocha test/automation/*.js --compilers js:babel-core/register
@@ -31,12 +48,13 @@ $ mocha test/automation/*.js --compilers js:babel-core/register
 
 # Running
 
-To run the worker, simply do the following commands
+To run the worker, simply do the following commands,
 
 ```
 $ gulp build
 $ node index.js
 ```
+- Then, visit http://localhost:8080/tickets/search in browser.
 
 # Code Structure
 
@@ -58,3 +76,4 @@ $ node index.js
 - `test/*.png` - screenshots saved from the end-to-end test
 
 - `libs` - third party files
+- `.env` - environments setting file
