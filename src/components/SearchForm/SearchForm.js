@@ -59,8 +59,8 @@ export class SearchFormOneWay extends React.Component {
     if (this.isValid(this.state.fields)) {
       this.props.onSearch(new SearchQueryOneWay(
         Currency.fromJson(currencyTypes.GBP),
-        this.state.fields.from,
-        this.state.fields.destination,
+        this.state.fields.from.trim(),
+        this.state.fields.destination.trim(),
         this.state.fields.departureDate,
         this.state.fields.passengers
       ));
@@ -106,7 +106,7 @@ export class SearchFormReturn extends React.Component {
   };
   render = () => {
     return (
-      <div className="search-form">
+      <form className="search-form">
         <TextInput fieldName="from" displayName="from"
           value={this.state.fields.from} hasError={this.state.errors.from}
           onChange={this.onChangeHandler} />
@@ -123,7 +123,7 @@ export class SearchFormReturn extends React.Component {
           value={this.state.fields.passengers} hasError={this.state.errors.passengers}
           onChange={this.onChangeHandler} />
         <SubmitButton onSubmit={this.onSubmitHandler} />
-      </div>
+      </form>
     );
   };
   onChangeHandler = (fieldName, value) => {

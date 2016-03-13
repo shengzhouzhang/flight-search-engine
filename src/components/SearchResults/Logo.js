@@ -6,6 +6,6 @@ export default class Logo extends React.Component {
     imageUri: React.PropTypes.string.isRequired,
   };
   render = () => {
-    return (<div className="airline-logo"><img src={this.props.imageUri} /></div>);
+    return (<div className="airline-logo"><img src={this.props.imageUri} alt="airline" /></div>);
   };
 }

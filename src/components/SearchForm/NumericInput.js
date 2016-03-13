@@ -12,8 +12,9 @@ export default class NumericInput extends React.Component {
   render = () => {
     return (
       <div className={`numeric-input form-item ${this.props.fieldName} ${this.props.hasError ? 'error' : ''}`}>
-        <label>{ this.props.displayName }</label>
-        <input type="number" value={this.props.value} min="1" onChange={this.onChangeHandler} />
+        <label htmlFor={this.props.fieldName}>{ `${this.props.displayName} *` }</label>
+        <input type="number" name={this.props.fieldName} value={this.props.value}
+          min="1" max="100" onChange={this.onChangeHandler} required />
       </div>
     );
   };

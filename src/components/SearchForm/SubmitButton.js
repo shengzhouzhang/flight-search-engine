@@ -7,7 +7,7 @@ export default class SubmitButton extends React.Component {
     onSubmit: React.PropTypes.func.isRequired,
   };
   render = () => {
-    return (<button className="submit-button" onClick={this.onClickHandler}>search</button>);
+    return (<button className="submit-button" type="submit" onClick={this.onClickHandler}>search</button>);
   };
   onClickHandler = (event) => {
     event.preventDefault();
