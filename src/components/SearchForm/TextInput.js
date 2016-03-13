@@ -14,7 +14,7 @@ export default class TextInput extends React.Component {
       <div className={`text-input form-item ${this.props.fieldName} ${this.props.hasError ? 'error' : ''}`}>
         <label htmlFor={this.props.fieldName}>{ `${this.props.displayName} *` }</label>
         <input type="text" name={this.props.fieldName} value={this.props.value}
-          onChange={this.onChangeHandler} maxLength={20} required />
+          onChange={this.onChangeHandler} maxLength={15} required />
       </div>
     );
   };

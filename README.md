@@ -2,7 +2,7 @@
 
 - This program is the implementation of the flight search engine based on the exercise spec.
 - It includes a search results page, the unit tests, and the end-to-end automated tests.
-- The search results are generated based on the form inputs through requesting to the endpoint `/api/tickets/search`.
+- The JSON of search result is generated based on the front end inputs when requesting the api endpoint
 - The program uses React JS + Redux + Express JS + Mocha + Enzyme
 
 # Environment
