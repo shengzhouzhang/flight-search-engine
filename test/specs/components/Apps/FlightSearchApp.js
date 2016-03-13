@@ -13,11 +13,11 @@ describe('FlightSearchApp Component', () => {
 
   describe('render function', () => {
 
-    it('should render page header, search form, and search results', () => {
+    it('should render page header, search form, price slider, and search results', () => {
       let wrapper = shallow(<FlightSearchApp />);
       expect(wrapper.contains(<PageHeader />)).to.eql(true);
       expect(wrapper.contains(<SearchForm />)).to.eql(true);
-      expect(wrapper.contains(<PriceSlider />)).to.eql(false);
+      expect(wrapper.contains(<PriceSlider />)).to.eql(true);
       expect(wrapper.contains(<SearchResults />)).to.eql(true);
     });
 
