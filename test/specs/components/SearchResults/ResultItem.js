@@ -14,7 +14,7 @@ import ResultItem from '../../../../src/components/SearchResults/ResultItem';
 import ticketType from '../../../../src/config/ticketTypes';
 import { genTicket } from '../../../utils/gen';
 
-describe('Search Result Item Component', () => {
+describe('ResultItem Component', () => {
 
   describe('render function', () => {
 
