@@ -12,9 +12,6 @@ module.exports = {
     publicPath: '/assets/'
   },
   devtool: '#source-map',
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({ minimize: true })
-  ],
   module: {
     loaders: [
       { test: /\.js$/, exclude: /(node_modules|bower_components)/, loaders: [ 'babel' ] },
