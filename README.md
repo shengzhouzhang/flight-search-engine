@@ -3,7 +3,6 @@
 - This program is the implementation of the flight search engine based on the exercise spec.
 - It includes a search results page, the unit tests, and the end-to-end automated tests.
 - The search results are generated based on the form inputs through requesting to the endpoint `/api/tickets/search`.
-- The search results page is under the path `/api/tickets/search`
 - The program uses React JS + Redux + Express JS + Mocha + Enzyme
 
 # Environment
@@ -15,6 +14,8 @@
 - MAC -- OS X EI Capitan -- version 10.11.3
 
 # Installation
+
+To install the dependencies, simply do,
 
 ```
 $ npm install
@@ -31,7 +32,7 @@ $ npm test
 ```
 
 - Automated End-to-End tests are under folder `test/automation`.
-- It needs a running server, it visits `http://localhost:8080/tickets/search` by default.
+- It needs a running server and visits `http://localhost:8080/tickets/search` by default.
 - Please use a terminal to start a server. simply do,
 
 ```
@@ -45,17 +46,19 @@ $ node index.js
 $ mocha test/automation/*.js --compilers js:babel-core/register
 ```
 
-- After the End-to-End test completed, it will save two screenshots to folder `test` with `.png` extension.
+- It will save two screenshots to folder `test` with `.png` extension.
 
 # Running
 
-To run the worker, simply do the following commands,
+To run the program, simply do the following commands,
 
 ```
 $ gulp build
 $ node index.js
 ```
-- Then, visit http://localhost:8080/tickets/search in browser.
+And then, visit http://localhost:8080/tickets/search from browser.
+
+Tested on Chrome, Firefox, and Safari.
 
 # Code Structure
 
