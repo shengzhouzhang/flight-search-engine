@@ -4,6 +4,7 @@
 - It includes a search results page, the unit tests, and the end-to-end automated tests.
 - The search results are generated based on the form inputs through requesting to the endpoint `/api/tickets/search`.
 - The search results page is under the path `/api/tickets/search`
+- The program uses React JS + Redux + Express JS + Mocha + Enzyme
 
 # Environment
 
