@@ -10,7 +10,7 @@ $from-line-height: 25px;
 
   .form-header {
     position: relative;
-    display: flex;
+    @include display-flex();
 
     .tab-button  {
       display: inline-block;
@@ -28,12 +28,18 @@ $from-line-height: 25px;
       cursor: pointer;
       z-index: 0;
 
+      @include transition-duration(.3s);
+
       &::first-letter {
         text-transform: capitalize;
       }
 
       &.selected {
         z-index: 1;
+      }
+
+      &:hover {
+        background-color: $button-color-light;
       }
     }
   }
@@ -77,10 +83,16 @@ $from-line-height: 25px;
       line-height: $from-line-height * 1.5;
       text-transform: capitalize;
       border: 1px solid $border-color;
-      border-radius: 10px;
+      @include border-radius(10px);
       font-size: 14px;
       cursor: pointer;
       margin: 15px auto 20px auto;
+      background-color: $button-color;
+      @include transition-duration(.3s);
+
+      &:hover {
+        background-color: $button-color-light;
+      }
     }
   }
 }

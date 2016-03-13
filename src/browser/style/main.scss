@@ -1,8 +1,12 @@
 
-$border-color: #e8e8e8;
+$border-color: #ddd;
 $font-color: #333;
 $background-color-default: #fcfcfc;
 $background-color-light: #ffffff;
+$button-color: #e8e8e8;
+$button-color-light: #f1f1f1;
+
+@import './mixins.scss';
 
 * {
   box-sizing: border-box;

@@ -19,8 +19,9 @@ $price-slider-line-height: 25px;
   }
 
   .price-labels {
-    display: flex;
-    justify-content: space-between;
+    @include display-flex();
+    @include justify-content(space-between);
+
     margin-bottom: 5px;
     label {
       line-height: $price-slider-line-height;
