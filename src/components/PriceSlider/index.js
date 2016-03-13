@@ -2,65 +2,37 @@
 import _ from 'lodash';
 import React from 'react';
 import ReactSlider from 'react-slider';
-import resultStore from '../../browser/stores/results';
-import filterStore from '../../browser/stores/filter';
 
 export default class PriceSlider extends React.Component {
-  state = {
-    min: 0,
-    max: 10,
-    hidden: true,
-    values: [ 0, 10 ],
-    symbol: ''
+  static propTypes = {
+    onFilter: React.PropTypes.func.isRequired,
+    min: React.PropTypes.number,
+    max: React.PropTypes.number.isRequired,
+    symbol: React.PropTypes.string.isRequired,
+    values: React.PropTypes.array.isRequired,
+  };
+  static defaultProps = {
+    min: 0
   };
   render = () => {
     return (
-      <div className={`price-slider ${this.state.hidden ? 'hidden' : 'shown'}`}>
+      <div className="price-slider">
         <h5>refine flight search</h5>
         <div className="price-labels">
-          <label className="min-price">{ `${this.state.symbol}${this.state.min}` }</label>
-          <label className="max-price">{ `${this.state.symbol}${this.state.max}` }</label>
+          <label className="min-price">{ `${this.props.symbol}${this.props.min}` }</label>
+          <label className="max-price">{ `${this.props.symbol}${this.props.max}` }</label>
         </div>
-        <ReactSlider min={this.state.min} max={this.state.max}
-          value={this.state.values} withBars={true}
+        <ReactSlider min={this.props.min} max={this.props.max}
+          value={this.props.values} withBars={true}
           minDistance={10} pearling={true}
           onChange={this.onChangeHandler} >
-          <div className="custom-handle">{ this.state.values[0] }</div>
-          <div className="custom-handle">{ this.state.values[1] }</div>
+          <div className="custom-handle">{ this.props.values[0] }</div>
+          <div className="custom-handle">{ this.props.values[1] }</div>
         </ReactSlider>
       </div>
     );
   };
-  componentDidMount = () => {
-    this.subscribeResultStore();
-  };
-  componentWillUnmount = () => {
-    this.unsubscribeResultStore();
-  }
-  subscribeResultStore = () => {
-    this.unsubscribeResultStore = resultStore.subscribe(() => {
-      let result = resultStore.getState();
-      this.onResultStoreChange(result);
-    });
-  };
-  onResultStoreChange = (result = {}) => {
-    let adjustedMaxValue = this.getAdjustedMaxValue(result.tickets);
-    let symbol = result.searchQuery.currency.symbol;
-    return this.setState({
-      hidden: !result.tickets || result.tickets.length === 0,
-      max: adjustedMaxValue,
-      symbol: symbol,
-      values: [ 0, adjustedMaxValue ]
-    });
-  };
-  getAdjustedMaxValue = (tickets) => {
-    let maxPriceTicket = _.maxBy(tickets, ticket => ticket.price.value);
-    let maxPrice = maxPriceTicket && maxPriceTicket.price || undefined;
-    let maxValue = maxPrice && maxPrice.value || 0;
-    return maxValue && Math.ceil(maxValue / 100) * 100 || 0;
-  };
   onChangeHandler = (values) => {
-    this.setState({ values: values });
-    filterStore.dispatch({ type: 'UPDATE', filter: { min: values[0], max: values[1] }});
+    this.props.onFilter({ min: values[0], max: values[1] });
   };
 }
