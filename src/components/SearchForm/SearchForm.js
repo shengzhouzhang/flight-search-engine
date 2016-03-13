@@ -86,7 +86,7 @@ export default class SearchForm extends React.Component {
   };
   buildQueryOneWay = () => {
     let query = new SearchQueryOneWay(
-      new Currency(...currencyTypes.GBP),
+      Currency.fromJson(currencyTypes.GBP),
       this.state.from,
       this.state.destination,
       this.state.departureDate,
@@ -102,7 +102,7 @@ export default class SearchForm extends React.Component {
   };
   buildQueryReturn = () => {
     let query = new SearchQueryReturn(
-      new Currency(...currencyTypes.GBP),
+      Currency.fromJson(currencyTypes.GBP),
       this.state.from,
       this.state.destination,
       this.state.departureDate,

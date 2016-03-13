@@ -1,4 +1,5 @@
 
+import moment from 'moment';
 import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
@@ -10,28 +11,31 @@ import NumericInput from '../../../../src/components/SearchForm/NumericInput';
 import SubmitButton from '../../../../src/components/SearchForm/SubmitButton';
 import SearchForm from '../../../../src/components/SearchForm/SearchForm';
 import ticketTypes from '../../../../src/config/ticketTypes';
+import currencyTypes from '../../../../src/config/currencyTypes';
+import Currency from '../../../../src/domains/Currency';
 
 describe('SearchForm Component', () => {
 
   it('should show from, destination, departure date, passengers, and submit button', () => {
     const TEST_PROPS = {
-      type: ticketTypes.ONEWAY
+      ticketType: ticketTypes.ONEWAY
     };
     let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
     expect(wrapper.contains(
-      <TextInput fieldName="from" displayName="from" onChange={wrapper.instance().onChangeHandler} />
+      <TextInput fieldName="from" displayName="from" value={wrapper.instance().state.from}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
-      <TextInput fieldName="destination" displayName="destination" onChange={wrapper.instance().onChangeHandler} />
+      <TextInput fieldName="destination" displayName="destination" value={wrapper.instance().state.destination}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
-      <DateInput fieldName="departureDate" displayName="departure date" onChange={wrapper.instance().onChangeHandler} />
+      <DateInput fieldName="departureDate" displayName="departure date" value={wrapper.instance().state.departureDate}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
-      <DateInput fieldName="returnDate" displayName="return date" onChange={wrapper.instance().onChangeHandler} />
-    )).to.eql(false);
-    expect(wrapper.contains(
-      <NumericInput fieldName="passengers" displayName="passengers" onChange={wrapper.instance().onChangeHandler} />
+      <NumericInput fieldName="passengers" displayName="passengers" value={wrapper.instance().state.passengers}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
       <SubmitButton onSubmit={wrapper.instance().onSubmitHandler} />
@@ -40,23 +44,28 @@ describe('SearchForm Component', () => {
 
   it('should show from, destination, departure date, return date, passengers, and submit button', () => {
     const TEST_PROPS = {
-      type: ticketTypes.RETURN
+      ticketType: ticketTypes.RETURN
     };
     let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
     expect(wrapper.contains(
-      <TextInput fieldName="from" displayName="from" onChange={wrapper.instance().onChangeHandler} />
+      <TextInput fieldName="from" displayName="from" value={wrapper.instance().state.from}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
-      <TextInput fieldName="destination" displayName="destination" onChange={wrapper.instance().onChangeHandler} />
+      <TextInput fieldName="destination" displayName="destination" value={wrapper.instance().state.destination}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
-      <DateInput fieldName="departureDate" displayName="departure date" onChange={wrapper.instance().onChangeHandler} />
+      <DateInput fieldName="departureDate" displayName="departure date" value={wrapper.instance().state.departureDate}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
-      <DateInput fieldName="returnDate" displayName="return date" onChange={wrapper.instance().onChangeHandler} />
+      <DateInput fieldName="returnDate" displayName="return date" value={wrapper.instance().state.returnDate}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
-      <NumericInput fieldName="passengers" displayName="passengers" onChange={wrapper.instance().onChangeHandler} />
+      <NumericInput fieldName="passengers" displayName="passengers" value={wrapper.instance().state.passengers}
+        onChange={wrapper.instance().onChangeHandler} />
     )).to.eql(true);
     expect(wrapper.contains(
       <SubmitButton onSubmit={wrapper.instance().onSubmitHandler} />
@@ -65,7 +74,7 @@ describe('SearchForm Component', () => {
 
   it('should have the search-form class', () => {
     const TEST_PROPS = {
-      type: ticketTypes.ONEWAY
+      ticketType: ticketTypes.ONEWAY
     };
     let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
     expect(wrapper.hasClass('search-form')).to.eql(true);
@@ -73,13 +82,13 @@ describe('SearchForm Component', () => {
 
   it('should update state - oneway', () => {
     const TEST_PROPS = {
-      type: ticketTypes.ONEWAY
+      ticketType: ticketTypes.ONEWAY
     };
     let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
-    expect(wrapper.instance().state.from).to.eql(null);
-    expect(wrapper.instance().state.destination).to.eql(null);
-    expect(wrapper.instance().state.departureDate).to.eql(null);
-    expect(wrapper.instance().state.passengers).to.eql(null);
+    expect(wrapper.instance().state.from).to.eql('');
+    expect(wrapper.instance().state.destination).to.eql('');
+    expect(wrapper.instance().state.departureDate).to.eql(moment().format('YYYY-MM-DD'));
+    expect(wrapper.instance().state.passengers).to.eql(1);
     wrapper.instance().onChangeHandler({ from: 'PNQ' });
     wrapper.instance().onChangeHandler({ destination: 'DEL' });
     wrapper.instance().onChangeHandler({ departureDate: '2016-03-12' });
@@ -94,14 +103,14 @@ describe('SearchForm Component', () => {
 
   it('should update state - return', () => {
     const TEST_PROPS = {
-      type: ticketTypes.RETURN
+      ticketType: ticketTypes.RETURN
     };
     let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
-    expect(wrapper.instance().state.from).to.eql(null);
-    expect(wrapper.instance().state.destination).to.eql(null);
-    expect(wrapper.instance().state.departureDate).to.eql(null);
-    expect(wrapper.instance().state.returnDate).to.eql(null);
-    expect(wrapper.instance().state.passengers).to.eql(null);
+    expect(wrapper.instance().state.from).to.eql('');
+    expect(wrapper.instance().state.destination).to.eql('');
+    expect(wrapper.instance().state.departureDate).to.eql(moment().format('YYYY-MM-DD'));
+    expect(wrapper.instance().state.returnDate).to.eql(moment().add(1, 'day').format('YYYY-MM-DD'));
+    expect(wrapper.instance().state.passengers).to.eql(1);
     wrapper.instance().onChangeHandler({ from: 'PNQ' });
     wrapper.instance().onChangeHandler({ destination: 'DEL' });
     wrapper.instance().onChangeHandler({ departureDate: '2016-03-12' });
@@ -120,7 +129,7 @@ describe('SearchForm Component', () => {
 
     it('should call buildQueryOneWay function', () => {
       const TEST_PROPS = {
-        type: ticketTypes.ONEWAY
+        ticketType: ticketTypes.ONEWAY
       };
       let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
       wrapper.instance().buildQueryOneWay = sinon.stub().returns(Promise.resolve());
@@ -130,7 +139,7 @@ describe('SearchForm Component', () => {
 
     it('should call buildQueryReturn function', () => {
       const TEST_PROPS = {
-        type: ticketTypes.RETURN
+        ticketType: ticketTypes.RETURN
       };
       let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
       wrapper.instance().buildQueryReturn = sinon.stub().returns(Promise.resolve());
@@ -143,7 +152,7 @@ describe('SearchForm Component', () => {
 
     it('should return query for search flights', () => {
       const TEST_PROPS = {
-        type: ticketTypes.ONEWAY
+        ticketType: ticketTypes.ONEWAY
       };
       let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
       wrapper.instance().onChangeHandler({ from: 'PNQ' });
@@ -153,7 +162,8 @@ describe('SearchForm Component', () => {
       return wrapper.instance().buildQueryOneWay()
         .then(query => {
           expect(query).to.eql({
-            type: ticketTypes.ONEWAY,
+            ticketType: ticketTypes.ONEWAY,
+            currency: Currency.fromJson(currencyTypes.GBP),
             from: 'PNQ',
             destination: 'DEL',
             departureDate: '2016-03-12',
@@ -167,7 +177,7 @@ describe('SearchForm Component', () => {
 
     it('should return query for search flights', () => {
       const TEST_PROPS = {
-        type: ticketTypes.RETURN
+        ticketType: ticketTypes.RETURN
       };
       let wrapper = shallow(<SearchForm {...TEST_PROPS} />);
       wrapper.instance().onChangeHandler({ from: 'PNQ' });
@@ -178,7 +188,8 @@ describe('SearchForm Component', () => {
       return wrapper.instance().buildQueryReturn()
         .then(query => {
           expect(query).to.eql({
-            type: ticketTypes.RETURN,
+            ticketType: ticketTypes.RETURN,
+            currency: Currency.fromJson(currencyTypes.GBP),
             from: 'PNQ',
             destination: 'DEL',
             departureDate: '2016-03-12',
