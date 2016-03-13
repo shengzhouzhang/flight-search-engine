@@ -8,36 +8,13 @@ import { expect } from 'chai';
 import ResultList from '../../../../src/components/SearchResults/ResultList';
 import Container, { Header, SearchQuery } from '../../../../src/components/SearchResults/Container';
 
+import ticketTypes from '../../../../src/config/ticketTypes';
+import { genSearchQuery } from '../../../utils/gen';
+
 describe('Search Results Container Component', () => {
 
   it('should show title, query, and result list', () => {
-    // const SEARCH_RESULTS_PROPS = {
-    //   query: { departureDate: moment().valueOf(), returnDate: moment().valueOf() },
-    //   results: [ {
-    //     _id: 'TEST_ID',
-    //     airline: { logoUri: 'LOGO_URI' },
-    //     flight: {
-    //       number: 'AI-202',
-    //       from: 'PNQ',
-    //       destination: 'DEL',
-    //       depart: moment('2014-01-01 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
-    //       arrive: moment('2014-01-01 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
-    //     },
-    //     return: {
-    //       number: 'AI-203',
-    //       from: 'PNQ',
-    //       destination: 'DEL',
-    //       depart: moment('2014-01-10 10:00 AM', 'YYYY-MM-DD HH:mm A').valueOf(),
-    //       arrive: moment('2014-01-10 12:00 PM', 'YYYY-MM-DD HH:mm A').valueOf(),
-    //     },
-    //     price: { symbol: '£', value: 125 },
-    //     onSelect: sinon.spy()
-    //   } ]
-    // };
-    // let wrapper = shallow(<Container />);
-    // expect(wrapper.contains(<Header />)).to.eql(true);
-    // expect(wrapper.contains(<SearchQuery {...SEARCH_RESULTS_PROPS.query} />)).to.eql(true);
-    // expect(wrapper.contains(<ResultList items={SEARCH_RESULTS_PROPS.results} />)).to.eql(true);
+    
   });
 
   it('should have the search-results class', () => {
@@ -47,42 +24,42 @@ describe('Search Results Container Component', () => {
 
   describe('Header Component', () => {
 
-    it('should show the title', () => {
-      let wrapper = shallow(<Header />);
-      expect(wrapper.text()).to.eql('your results');
+    it('should show the title and query info', () => {
+      const PROPS = { query: { departureDate: genSearchQuery(ticketTypes.ONEWAY).departureDate } }
+      let wrapper = shallow(<Header {...PROPS} />);
+      expect(wrapper.contains(<h4 className="header">your results</h4>)).to.eql(true);
+      expect(wrapper.contains(<SearchQuery {...PROPS.query} />)).to.eql(true);
     });
 
-    it('should have the header class', () => {
-      let wrapper = shallow(<Header />);
-      expect(wrapper.hasClass('header')).to.eql(true);
+    it('should have the result-header class', () => {
+      const PROPS = { query: { departureDate: genSearchQuery(ticketTypes.ONEWAY).departureDate } }
+      let wrapper = shallow(<Header {...PROPS} />);
+      expect(wrapper.hasClass('result-header')).to.eql(true);
     });
   });
 
   describe('SearchQuery Component', () => {
 
     it('should show the departure date', () => {
-      const SEARCH_QUERY_PROPS = {
-        departureDate: moment('2014-01-01', 'YYYY-MM-DD').valueOf()
-      };
-      let wrapper = shallow(<SearchQuery {...SEARCH_QUERY_PROPS} />);
-      expect(wrapper.find('.departure-date').text()).to.eql('1st Jan 2014');
+      const PROPS = { departureDate: genSearchQuery(ticketTypes.ONEWAY).departureDate }
+      let wrapper = shallow(<SearchQuery {...PROPS} />);
+      expect(wrapper.find('.departure-date').text()).to.eql(`depart: ${moment(PROPS.departureDate).format('Do MMM YYYY')}`);
     });
 
     it('should show the departure date and return date', () => {
-      const SEARCH_QUERY_PROPS = {
-        departureDate: moment('2014-01-01', 'YYYY-MM-DD').valueOf(),
-        returnDate: moment('2014-01-10', 'YYYY-MM-DD').valueOf(),
+      const SEARCH_QUERY = genSearchQuery(ticketTypes.RETURN);
+      const PROPS = {
+        departureDate: SEARCH_QUERY.departureDate,
+        returnDate: SEARCH_QUERY.returnDate
       };
-      let wrapper = shallow(<SearchQuery {...SEARCH_QUERY_PROPS} />);
-      expect(wrapper.find('.departure-date').text()).to.eql('1st Jan 2014');
-      expect(wrapper.find('.return-date').text()).to.eql('10th Jan 2014');
+      let wrapper = shallow(<SearchQuery {...PROPS} />);
+      expect(wrapper.find('.departure-date').text()).to.eql(`depart: ${moment(PROPS.departureDate).format('Do MMM YYYY')}`);
+      expect(wrapper.find('.return-date').text()).to.eql(`return: ${moment(PROPS.returnDate).format('Do MMM YYYY')}`);
     });
 
     it('should have the search-query class', () => {
-      const SEARCH_QUERY_PROPS = {
-        departureDate: moment('2014-01-01', 'YYYY-MM-DD').valueOf()
-      };
-      let wrapper = shallow(<SearchQuery {...SEARCH_QUERY_PROPS} />);
+      const PROPS = { departureDate: genSearchQuery(ticketTypes.ONEWAY).departureDate }
+      let wrapper = shallow(<SearchQuery {...PROPS} />);
       expect(wrapper.hasClass('search-query')).to.eql(true);
     });
   });
