@@ -11,7 +11,7 @@ export default class DateInput extends React.Component {
   };
   render = () => {
     return (
-      <div className={`date-input form-item ${ this.props.hasError ? 'error' : ''}`}>
+      <div className={`date-input form-item ${this.props.fieldName} ${this.props.hasError ? 'error' : ''}`}>
         <label>{ this.props.displayName }</label>
         <input type="date" value={this.props.value} onChange={this.onChangeHandler} />
       </div>

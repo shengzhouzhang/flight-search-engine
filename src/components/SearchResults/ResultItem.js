@@ -25,6 +25,6 @@ export default class ResultItem extends React.Component {
     );
   };
   onSelectHandler = () => {
-    console.log(this.props._id);
+    alert(`clicked ticket: ${this.props._id}`);
   };
 }
