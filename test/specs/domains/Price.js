@@ -20,7 +20,7 @@ describe('Price Domain', () => {
 
   describe('fromJson function', () => {
 
-    it('should construct an Object from Json', () => {
+    it('should construct an object from Json', () => {
       const PRICE = {
         currency: currencyTypes.GBP,
         value: 100

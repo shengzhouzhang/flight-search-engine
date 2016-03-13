@@ -15,7 +15,7 @@ describe('Airline Domain', () => {
 
   describe('fromJson function', () => {
 
-    it('should construct an Object from Json', () => {
+    it('should construct an object from Json', () => {
       const IMAGE_URI = 'IMAGE_URI';
       const RAW = { logo: { imageUri: IMAGE_URI }};
       let airline = Airline.fromJson(RAW);

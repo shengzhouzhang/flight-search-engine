@@ -109,7 +109,7 @@ describe('TicketOneWay Domain', () => {
 
   describe('fromJson function', () => {
 
-    it('should construct an Object from Json', () => {
+    it('should construct an object from Json', () => {
       const TICKET = {
         _id: '0',
         type: ticketTypes.ONEWAY,
@@ -179,7 +179,7 @@ describe('TicketReturn Domain', () => {
 
   describe('fromJson function', () => {
 
-    it('should construct an Object from Json', () => {
+    it('should construct an object from Json', () => {
       const TICKET = {
         _id: '0',
         type: ticketTypes.RETURN,

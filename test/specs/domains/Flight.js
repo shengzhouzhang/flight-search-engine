@@ -29,7 +29,7 @@ describe('Flight Domain', () => {
 
   describe('fromJson function', () => {
 
-    it('should construct an Object from Json', () => {
+    it('should construct an object from Json', () => {
       const FLIGHT = {
         _id: '0',
         number: 'AI-202',

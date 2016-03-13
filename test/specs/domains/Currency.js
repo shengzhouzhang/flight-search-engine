@@ -17,7 +17,7 @@ describe('Currency Domain', () => {
 
   describe('fromJson function', () => {
 
-    it('should construct an Object from Json', () => {
+    it('should construct an object from Json', () => {
       const RAW = currencyTypes.GBP;
       let currency = Currency.fromJson(RAW);
       expect(currency).to.eql(new Currency(RAW.code, RAW.symbol));
